@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Nhập mật khẩu"
+        android:textColor="@color/colorTextBlack"
+        android:layout_marginBottom="30dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginLeft="30dp"
+        android:text="Mật khẩu" />
+
+    <RelativeLayout
+        android:id="@+id/rl_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <EditText
+            android:hint="password"
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"
+            android:id="@+id/edtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/imgView"
+            android:background="@drawable/bg_pass"
+            android:inputType="textPassword"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="30dp"
+
+            />
+
+        <ImageView
+            android:background="@drawable/bg_eye"
+            android:id="@+id/imgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/edtPass"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/edtPass"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/eye" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginBottom="40dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rl_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Hủy"
+            android:textSize="18sp"
+            android:padding="6dp"
+            android:background="@drawable/bg_pass"
+            android:gravity="center"
+            android:textColor="@color/colorTextBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Kết nối"
+            android:textSize="18sp"
+            android:padding="6dp"
+            android:background="@drawable/bg_pass"
+            android:gravity="center"
+            android:textColor="@color/colorTextBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

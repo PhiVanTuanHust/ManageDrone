@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#e2e0e0"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:hint="Nhập id Drone"
+            android:padding="8dp"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rl"
+        android:background="@color/divider" />
+    <android.support.v7.widget.RecyclerView
+        android:background="#f0f1f0"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/rcvList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl"/>
+    <!--<ImageView-->
+        <!--android:padding="5dp"-->
+        <!--android:src="@drawable/refresh"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_above="@+id/tvRefresh"-->
+        <!--android:id="@+id/imgRefresh"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<TextView-->
+        <!--android:id="@+id/tvRefresh"-->
+        <!--android:textColor="@color/colorTextBlack"-->
+        <!--android:text="Làm mới"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+</RelativeLayout>

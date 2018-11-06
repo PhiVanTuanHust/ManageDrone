@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/viewHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tvTitle"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/colorTextBlack"
+            android:text="Độ cao : (m) "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+     <android.support.design.widget.TextInputLayout
+         android:layout_width="wrap_content"
+         android:layout_centerVertical="true"
+         android:layout_toRightOf="@+id/tvTitle"
+         android:layout_height="wrap_content">
+         <EditText
+             android:text="50"
+             android:id="@+id/edtHeight"
+             android:inputType="number"
+             android:layout_margin="10dp"
+             android:layout_centerVertical="true"
+             android:layout_toRightOf="@+id/tvTitle"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+
+         </EditText>
+     </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+    <View
+        android:background="@color/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:id="@+id/viewSpeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tvTitleSpeed"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/colorTextBlack"
+            android:text="Tốc độ : (km/h) "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tvTitleSpeed"
+            android:layout_height="wrap_content">
+            <EditText
+                android:text="50"
+                android:id="@+id/edtSpeed"
+                android:inputType="number"
+                android:layout_margin="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </EditText>
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+    <View
+        android:background="@color/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+       <RadioGroup
+
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <RadioButton
+               android:checked="true"
+               android:textSize="16sp"
+               android:text="@string/auto_fly"
+               android:layout_margin="5dp"
+               android:id="@+id/radio_auto_fly"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+
+           <RadioButton
+               android:textSize="16sp"
+               android:text="@string/manual_fly"
+               android:layout_margin="5dp"
+               android:id="@+id/radio_manual_fly"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+       </RadioGroup>
+    </RelativeLayout>
+    <View
+        android:background="@color/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <Switch
+            android:checked="true"
+            android:id="@+id/switch_send_data"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:theme="@style/SwitchTheme" />
+        <TextView
+            android:id="@+id/txtSendData"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/switch_send_data"
+            android:gravity="center_vertical"
+            android:text="@string/auto_sendata"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <View
+        android:background="@color/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>
+</ScrollView>

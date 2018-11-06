@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorTextWhite">#fff</color>
+    <color name="colorRed">#e20303</color>
+    <color name="colorTextBlack">#000000</color>
+    <color name="colorSearchView">#eeeeee</color>
+    <color name="divider">#d4d2d2</color>
+    <color name="colorSwitch">#46bdbf</color>
+
+    <color name="colorYellow">#FFEB3B</color>
+    <color name="google_red">#ea5a4f</color>
+    <color name="google_blue">#6099f5</color>
+    <color name="google_yellow">#edc855</color>
+    <color name="google_green">#5cb171</color>
+
+    <color name="black_overlay">#66000000</color>
+</resources>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg">
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/frame_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_btn_bg" />
+
+            <ImageView
+                android:id="@+id/iv_top_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/main_back" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_splitscreen"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/iv_splitscreen_hd_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_btn_bg" />
+
+            <ImageView
+                android:id="@+id/iv_splitscreen_hd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/splitscreen_hd1" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_gravity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/iv_gravity_hd_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_btn_bg" />
+
+            <ImageView
+                android:id="@+id/iv_top_gravity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/gravitydis" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="1dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_track_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+
+                android:src="@drawable/top_btn_bg" />
+
+            <ImageView
+                android:id="@+id/iv_track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/track" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_emergency"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:paddingRight="1dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_top_emergency_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_btn_bg" />
+
+            <TextView
+                android:id="@+id/tv_top_emergency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:text="EMERGENCY"
+                android:textColor="@color/colorRed" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/iv_top_card_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_btn_bg" />
+
+            <ImageView
+                android:id="@+id/iv_top_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/card"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_btn_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/iv_top_btn_wifi_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_btn_bg" />
+
+            <ImageView
+                android:id="@+id/iv_top_btn_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/btn_wifi" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_top_setting_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_btn_bg" />
+
+            <ImageView
+                android:id="@+id/iv_top_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_setting" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:id="@+id/layout_left"
+        android:orientation="vertical"
+        android:layout_below="@+id/layout_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/btncontrol_off"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@drawable/main_sdcard_capture"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@drawable/videodis"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/layout_left"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/layout_top">
+
+        <ImageView
+            android:id="@+id/left_rudder"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/layout_control"
+            android:layout_marginLeft="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/main_fly_rudder_power" />
+
+        <LinearLayout
+            android:id="@+id/layout_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.journaldev.navigationviewexpandablelistview.customs.BrightImageView
+                android:id="@+id/iv_left_landscape_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1.5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/l_trim"
+                android:visibility="visible" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6">
+
+                <ImageView
+                    android:id="@+id/iv_left_landscape_trimbg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/trim_bg" />
+
+                <ImageView
+                    android:id="@+id/iv_left_landscape_trimball"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/sign_trim1" />
+            </FrameLayout>
+
+            <com.journaldev.navigationviewexpandablelistview.customs.BrightImageView
+                android:id="@+id/iv_left_landscape_add"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1.5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/r_trim"
+                android:visibility="visible" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

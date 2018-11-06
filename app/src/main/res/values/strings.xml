@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Manage Drone</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="profile">Thông tin cá nhân</string>
+    <string name="log_out">Đăng xuất</string>
+
+    <string name="group_1">Cấu Hình Drone</string>
+    <string name="group_1_1">Kết nối drone</string>
+    <string name="group_1_2">Phương thức hoạt động</string>
+    <string name="group_2">Khoanh vùng khu vực cần quan sát</string>
+    <string name="group_3">Quan sát khu vực khoanh vùng</string>
+    <string name="group_4">Cảnh báo chặt phá rừng</string>
+    <string name="group_5"> Cài đặt </string>
+    <string name="group_6"> Hỗ Trợ</string>
+    <string name="group_6_1"> Hướng dẫn sử dụng</string>
+    <string name="group_6_2"> Câu hỏi thường gặp</string>
+    <string name="auto_sendata">Tự động gửi dữ liệu về trung tâm</string>
+    <string name="not_send_data">Không tự động gửi dữ liệu về trung tâm</string>
+    <string name="auto_fly">Bay tự động</string>
+    <string name="manual_fly">Điều khiển bằng tay</string>
+
+    <string name="first">Đây là lần đầu bạn sử dụng ứng dụng. Hãy làm theo các bước để cấu hình drone</string>
+    <string name="end">Bây giờ bạn có thể điều khiển drone.</string>
+    <!--<string name="group_7"> Nạp thông tin </string>-->
+    <!--<string name="group_8"> Phát lại các thông tin đã nạp </string>-->
+    <!--<string name="group_9"> So khớp hình ảnh </string>-->
+
+</resources>
