@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/map"
-        class="com.journaldev.navigationviewexpandablelistview.googlemap.MapFragment" />
+        class="com.manage.drone.googlemap.MapFragment" />
     <RelativeLayout
         android:layout_gravity="right|top"
         android:id="@+id/view_selected"

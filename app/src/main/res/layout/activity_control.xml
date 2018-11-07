@@ -249,7 +249,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.journaldev.navigationviewexpandablelistview.customs.BrightImageView
+            <com.manage.drone.customs.BrightImageView
                 android:id="@+id/iv_left_landscape_sub"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -281,7 +281,7 @@
                     android:src="@drawable/sign_trim1" />
             </FrameLayout>
 
-            <com.journaldev.navigationviewexpandablelistview.customs.BrightImageView
+            <com.manage.drone.customs.BrightImageView
                 android:id="@+id/iv_left_landscape_add"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
