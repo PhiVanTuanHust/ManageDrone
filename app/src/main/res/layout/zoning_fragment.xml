@@ -14,12 +14,29 @@
         android:layout_gravity="right|top"
         android:id="@+id/view_selected"
         android:layout_margin="4dp"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp">
         <ImageView
+            android:layout_alignParentRight="true"
             android:padding="4dp"
             android:src="@drawable/pen"
             android:id="@+id/imgSelected"
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+        <ImageView
+            android:layout_toLeftOf="@+id/imgDone"
+            android:padding="4dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_delete"
+            android:id="@+id/imgDelete"
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:padding="4dp"
+            android:src="@drawable/ic_done"
+            android:id="@+id/imgDone"
             android:layout_width="36dp"
             android:layout_height="36dp" />
     </RelativeLayout>

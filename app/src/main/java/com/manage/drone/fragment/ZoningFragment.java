@@ -5,6 +5,8 @@ import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,10 +19,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.manage.drone.MainActivity;
 import com.manage.drone.R;
 import com.manage.drone.googlemap.DrawingPanel;
 import com.manage.drone.googlemap.MapFragment;
@@ -45,14 +51,31 @@ public class ZoningFragment extends BaseFragment implements
     private ArrayList<LatLng> latLngs;
     private PolygonOptions polygonOptions;
     private Projection projection;
-    private LatLngBounds bounds;
+    private Marker marker;
     double maxDistanceFromCenter;
     private LatLng latLng = new LatLng(55.404290078521235, 89.46081262081861);
-    private LatLngBounds latLngBounds;
     @BindView(R.id.frame_view)
     FrameLayout flMapContainer;
     @BindView(R.id.imgSelected)
     ImageView imgDraw;
+    @BindView(R.id.imgDelete)
+    ImageView imgDelete;
+    @BindView(R.id.imgDone)
+    ImageView imgDone;
+
+    private int position=0;
+    private static final int WHAT_MARKER=0;
+
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == WHAT_MARKER) {
+                animateMarker();
+            }
+            super.handleMessage(msg);
+        }
+    };
 
     public static ZoningFragment newInstance() {
 
@@ -104,9 +127,9 @@ public class ZoningFragment extends BaseFragment implements
                 latLngs.add(latLng);
 
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    mMap.clear();
 
-                    //Join all points and draw polygon
+
+
                     polygonOptions.strokeWidth(10);
                     polygonOptions.strokeColor(getResources().getColor(R.color.colorRed));
                     polygonOptions.addAll(latLngs);
@@ -149,9 +172,10 @@ public class ZoningFragment extends BaseFragment implements
                     if (!Const.lstPolygonOptions.contains(polygonOptions)){
                         Const.lstPolygonOptions.add(polygonOptions);
                     }
-
-                    //latLngBounds = toBounds(latLng, maxDistanceFromCenter);
-
+                    drawingpanel.setVisibility(View.GONE);
+                    imgDone.setVisibility(View.VISIBLE);
+                    imgDelete.setVisibility(View.VISIBLE);
+                    imgDraw.setVisibility(View.GONE);
 
                 }
 
@@ -160,7 +184,6 @@ public class ZoningFragment extends BaseFragment implements
 
 
     }
-
 
     @Override
     public boolean onMyLocationButtonClick() {
@@ -189,16 +212,18 @@ public class ZoningFragment extends BaseFragment implements
             }
         });
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(55.404290078521235, 89.46081262081861), 13));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(55.404290078521235, 89.46081262081861))      // Sets the center of the map to location user
-                .zoom(17)                   // Sets the zoom
+                .target(latLng)      // Sets the center of the map to location user
+                .zoom(16)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
                 .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        addMarkerToMap();
+        animateMarker();
     }
 
     @Override
@@ -208,12 +233,33 @@ public class ZoningFragment extends BaseFragment implements
 
     @OnClick(R.id.imgSelected)
     public void onDraw() {
-        mMap.clear();
+
         drawingpanel.setVisibility(View.VISIBLE);
         drawingpanel.clear();
         polygonOptions = new PolygonOptions();
         latLngs=new ArrayList<>();
 
+    }
+    @OnClick(R.id.imgDelete)
+    public void onDelete() {
+        mMap.clear();
+        addMarkerToMap();
+        animateMarker();
+        Const.lstPolygonOptions=new ArrayList<>();
+        drawingpanel.clear();
+        imgDraw.setVisibility(View.VISIBLE);
+        imgDone.setVisibility(View.GONE);
+        imgDelete.setVisibility(View.GONE);
+        polygonOptions = new PolygonOptions();
+        latLngs=new ArrayList<>();
+
+    }
+    @OnClick(R.id.imgDone)
+    public void onDone() {
+        MainActivity mainActivity=(MainActivity)getActivity();
+        if (mainActivity!=null){
+            mainActivity.switchFragment(ObserveFragment.newInstance());
+        }
 
     }
 
@@ -242,7 +288,7 @@ public class ZoningFragment extends BaseFragment implements
 
                     @Override
                     public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
-//                        imgDraw.setVisibility(View.GONE);
+
                     }
 
                     @Override
@@ -258,5 +304,22 @@ public class ZoningFragment extends BaseFragment implements
                 }).playOn(imgDraw);
             }
         }, 10000);
+    }
+
+    private void animateMarker(){
+            if (position<Const.lstLatLng.size()-1){
+                position=position+1;
+            }else {
+                position=0;
+            }
+            marker.setPosition(Const.lstLatLng.get(position));
+            mHandler.sendEmptyMessageDelayed(WHAT_MARKER,100);
+    }
+
+    private void addMarkerToMap(){
+        LatLng latLng=Const.lstLatLng.get(0);
+        marker=mMap.addMarker(new MarkerOptions().position(latLng));
+        marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone));
+
     }
 }
