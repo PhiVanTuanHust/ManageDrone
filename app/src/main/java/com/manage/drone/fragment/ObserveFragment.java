@@ -1,6 +1,9 @@
 package com.manage.drone.fragment;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -9,10 +12,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +36,13 @@ import com.manage.drone.MainActivity;
 import com.manage.drone.R;
 import com.manage.drone.utils.Const;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +61,7 @@ public class ObserveFragment extends BaseFragment implements
     private int position = 0;
     private List<LatLng> lstPositionMoving = new ArrayList<>();
     private static final int WHAT_MARKER=0;
+
 
     private Handler mHandler = new Handler() {
 
@@ -110,18 +124,19 @@ public class ObserveFragment extends BaseFragment implements
         googleMap.getUiSettings().setCompassEnabled(true);
         if (Const.lstPolygonOptions.size() > 0) {
 
+            for (int i=0;i<Const.lstPolygonOptions.size();i++){
+                PolygonOptions polygonOptions = Const.lstPolygonOptions.get(i);
+                polygonOptions.strokeWidth(10);
+                polygonOptions.strokeColor(getResources().getColor(R.color.colorRed));
+                LatLng marker = getPositionObserve(polygonOptions);
+                addMarkerObserve(marker);
 
-            PolygonOptions polygonOptions = Const.lstPolygonOptions.get(0);
-            polygonOptions.strokeWidth(10);
-            polygonOptions.strokeColor(getResources().getColor(R.color.colorRed));
-            LatLng marker = getPositionObserve(polygonOptions);
-            addMarkerObserve(marker);
-//                if (oldMarker!=null){
-//                    animateMarker(this.oldMarker, this.marker.getPosition());
-//                }
-            latMean = latMean + marker.latitude;
-            lonMean = lonMean + marker.longitude;
-            mMap.addPolygon(polygonOptions);
+                latMean = latMean + marker.latitude;
+                lonMean = lonMean + marker.longitude;
+                mMap.addPolygon(polygonOptions);
+
+            }
+
 
             latLng = new LatLng(latMean / Const.lstPolygonOptions.size(), lonMean / Const.lstPolygonOptions.size());
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
@@ -135,6 +150,7 @@ public class ObserveFragment extends BaseFragment implements
             mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
             mMap.setOnMarkerClickListener(this);
             animateMarker(0);
+
         }
 
     }
@@ -154,7 +170,6 @@ public class ObserveFragment extends BaseFragment implements
         int size = polygonOptions.getPoints().size();
         for (int i = 0; i < size; i++) {
             LatLng item = polygonOptions.getPoints().get(i);
-            Log.e("lat",item.latitude+"  lng  "+item.longitude);
             latitude = latitude + item.latitude;
             longitude = longitude + item.longitude;
             lstPositionMoving.add(new LatLng(item.latitude, item.longitude));

@@ -12,15 +12,20 @@ import android.widget.TextView;
 import com.manage.drone.R;
 import com.manage.drone.models.QuestionModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class QuestionAdapter extends BaseExpandableListAdapter {
     private List<QuestionModel> lstQuestion;
+    private List<QuestionModel> searchLst;
     private Context context;
 
     public QuestionAdapter(Context context) {
         this.context = context;
         lstQuestion = new QuestionModel().getQuestionSuggest();
+        searchLst=new ArrayList<>();
+        searchLst.addAll(lstQuestion);
 
     }
 
@@ -102,5 +107,21 @@ public class QuestionAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
+    }
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        lstQuestion.clear();
+        if (charText.length() == 0) {
+            lstQuestion.addAll(searchLst);
+        } else {
+            for (QuestionModel wp : searchLst) {
+                if (wp.getTitle().toLowerCase(Locale.getDefault())
+                        .contains(charText)) {
+                    lstQuestion.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

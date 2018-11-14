@@ -2,6 +2,9 @@ package com.manage.drone.utils;
 
 
 import android.content.Context;
+import android.os.Environment;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -10,8 +13,19 @@ import com.manage.drone.models.ChildModel;
 import com.manage.drone.models.GroupModel;
 import com.manage.drone.models.GuideModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -21,6 +35,8 @@ import java.util.List;
 public class Const {
     private static List<GroupModel> groupModels;
     public static List<LatLng> lstLatLng = new ArrayList<>();
+
+    public static String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "tuan";
 
     static {
         lstLatLng.add(new LatLng(55.40514994239178, 89.45893842726947));
@@ -58,6 +74,55 @@ public class Const {
         lstLatLng.add(new LatLng(55.40291677030222, 89.46348074823618));
 
     }
+
+    private static String getRaw(Context context) {
+        try {
+            InputStream openRawResource = context.getResources().openRawResource(R.raw.a);
+            Reader inputStreamReader = new InputStreamReader(openRawResource, Charset.forName("UTF-8"));
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder sb = new StringBuilder();
+            while (true) {
+                String readLine = bufferedReader.readLine();
+                if (readLine != null) {
+                    sb.append(readLine);
+                } else {
+                    openRawResource.close();
+                    inputStreamReader.close();
+                    bufferedReader.close();
+                    return sb.toString();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public static final HashSet<List<LatLng>> getLatLng(Context context) {
+        HashSet<List<LatLng>> hashMap = new HashSet<>();
+        try {
+            JSONArray array = new JSONArray(getRaw(context));
+            for (int i = 0; i < array.length(); i++) {
+                JSONArray array1 = array.getJSONArray(i);
+                List<LatLng> lstLatLng = new ArrayList<>();
+                for (int j = 0; j < array1.length(); j++) {
+                    JSONObject object = array1.getJSONObject(j);
+                    double lat = object.getDouble("lat");
+                    double lng = object.getDouble("lng");
+                    lstLatLng.add(new LatLng(lat, lng));
+                }
+                hashMap.add(lstLatLng);
+            }
+            return hashMap;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return hashMap;
+
+
+
+}
+
 
     public static List<PolygonOptions> lstPolygonOptions = new ArrayList<>();
 

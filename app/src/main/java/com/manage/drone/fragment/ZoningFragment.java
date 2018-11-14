@@ -30,9 +30,12 @@ import com.manage.drone.MainActivity;
 import com.manage.drone.R;
 import com.manage.drone.googlemap.DrawingPanel;
 import com.manage.drone.googlemap.MapFragment;
+import com.manage.drone.models.MarkerModel;
 import com.manage.drone.utils.Const;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +54,8 @@ public class ZoningFragment extends BaseFragment implements
     private ArrayList<LatLng> latLngs;
     private PolygonOptions polygonOptions;
     private Projection projection;
-    private Marker marker;
+    private List<MarkerModel> lstMarkerModel;
+    private List<Integer> lstPosition=new ArrayList<>();
     double maxDistanceFromCenter;
     private LatLng latLng = new LatLng(55.404290078521235, 89.46081262081861);
     @BindView(R.id.frame_view)
@@ -62,7 +66,7 @@ public class ZoningFragment extends BaseFragment implements
     ImageView imgDelete;
     @BindView(R.id.imgDone)
     ImageView imgDone;
-
+    private HashSet<List<LatLng>> set;
     private int position=0;
     private static final int WHAT_MARKER=0;
 
@@ -307,19 +311,35 @@ public class ZoningFragment extends BaseFragment implements
     }
 
     private void animateMarker(){
-            if (position<Const.lstLatLng.size()-1){
+        for (int i=0;i<lstMarkerModel.size();i++){
+            int position=lstPosition.get(i);
+            MarkerModel markerModel=lstMarkerModel.get(i);
+            Marker marker=markerModel.getMarker();
+            if (position<markerModel.getLstLatLng().size()-1){
                 position=position+1;
             }else {
                 position=0;
             }
-            marker.setPosition(Const.lstLatLng.get(position));
+            lstPosition.set(i,position);
+            marker.setPosition(markerModel.getLstLatLng().get(position));
+        }
+
             mHandler.sendEmptyMessageDelayed(WHAT_MARKER,100);
     }
 
     private void addMarkerToMap(){
-        LatLng latLng=Const.lstLatLng.get(0);
-        marker=mMap.addMarker(new MarkerOptions().position(latLng));
-        marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone));
+
+        set=Const.getLatLng(getActivity());
+        lstPosition=new ArrayList<>();
+        lstMarkerModel=new ArrayList<>();
+        for (List<LatLng> lstLatLng:set){
+            LatLng latLng=lstLatLng.get(0);
+            lstPosition.add(0);
+            Marker marker=mMap.addMarker(new MarkerOptions().position(latLng));
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone));
+            lstMarkerModel.add(new MarkerModel(marker,lstLatLng));
+        }
+
 
     }
 }
