@@ -37,7 +37,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     public static DataBaseManager getInstance(Context context){
         return dataBaseManager;
     }
-    public DataBaseManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DataBaseManager(Context context) {
         super(context, NAME, null, 1);
     }
 
@@ -59,8 +59,6 @@ public class DataBaseManager extends SQLiteOpenHelper {
         PolygonOptions polygonOptions=new PolygonOptions();
         List<LatLng> latLngs=new ArrayList<>();
         polygonOptions.addAll(latLngs);
-
-
         return polygonOptions;
     }
 }

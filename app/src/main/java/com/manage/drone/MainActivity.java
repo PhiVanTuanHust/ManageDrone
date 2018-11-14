@@ -2,6 +2,7 @@ package com.manage.drone;
 
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,6 +27,8 @@ import com.manage.drone.fragment.ZoningFragment;
 import com.manage.drone.utils.SharePref;
 import com.manage.drone.view.ControlActivity;
 import com.manage.drone.view.GuideActivity;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
