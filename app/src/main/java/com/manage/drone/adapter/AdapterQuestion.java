@@ -50,7 +50,6 @@ public class AdapterQuestion extends RecyclerView.Adapter<AdapterQuestion.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         QuestionModel questionModel = lstQuestion.get(position);
-        holder.tvQuestion.setText(questionModel.getTitle());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,8 +65,6 @@ public class AdapterQuestion extends RecyclerView.Adapter<AdapterQuestion.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvQuestion)
-        TextView tvQuestion;
 
         public ViewHolder(View itemView) {
             super(itemView);

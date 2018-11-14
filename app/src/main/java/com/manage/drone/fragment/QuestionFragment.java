@@ -1,16 +1,13 @@
 package com.manage.drone.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 
 import com.manage.drone.R;
-import com.manage.drone.adapter.AdapterQuestion;
 import com.manage.drone.adapter.BaseRecycleViewAdapter;
-import com.manage.drone.models.QuestionModel;
+import com.manage.drone.adapter.QuestionAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +20,7 @@ public class QuestionFragment extends BaseFragment implements BaseRecycleViewAda
     @BindView(R.id.edtSearch)
     EditText editSearch;
     @BindView(R.id.rcvList)
-    RecyclerView rcView;
+    ExpandableListView rcView;
 
     public static QuestionFragment newInstance() {
 
@@ -33,10 +30,10 @@ public class QuestionFragment extends BaseFragment implements BaseRecycleViewAda
         fragment.setArguments(args);
         return fragment;
     }
-    private AdapterQuestion adapter;
+    private QuestionAdapter adapter;
     @Override
     protected int getLayoutRes() {
-        return R.layout.connect_fragment;
+        return R.layout.question_fragment;
     }
 
     @Override
@@ -47,12 +44,8 @@ public class QuestionFragment extends BaseFragment implements BaseRecycleViewAda
     @Override
     protected void initData() {
         editSearch.setHint("Xin chào chúng tôi có thể giúp gì cho bạn");
-        rcView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rcView.addItemDecoration(new DividerItemDecoration(rcView.getContext(),DividerItemDecoration.VERTICAL));
-        adapter=new AdapterQuestion(getActivity(),this);
+        adapter=new QuestionAdapter(getActivity());
         rcView.setAdapter(adapter);
-
-        adapter.loadQuestion(new QuestionModel().getQuestionSuggest());
     }
 
     @Override
