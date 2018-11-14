@@ -1,5 +1,6 @@
 package com.manage.drone;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Environment;
@@ -27,6 +28,7 @@ import com.manage.drone.fragment.ZoningFragment;
 import com.manage.drone.utils.SharePref;
 import com.manage.drone.view.ControlActivity;
 import com.manage.drone.view.GuideActivity;
+import com.manage.drone.view.ProfileActivity;
 
 import java.io.File;
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         expandableListView = findViewById(R.id.expandableListView);
 //        prepareMenuData();
         populateExpandableList();
-        prefs=new SharePref(this);
+        prefs = new SharePref(this);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -57,11 +59,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        if (prefs.getBooleanValue(SharePref.NAME_FIRST_OPEN)){
+        if (prefs.getBooleanValue(SharePref.NAME_FIRST_OPEN)) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, StartFragment.newInstance(StartFragment.FIRST), StartFragment.class.getSimpleName());
             transaction.commit();
-        }else {
+        } else {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, StartFragment.newInstance(StartFragment.END), StartFragment.class.getSimpleName());
             transaction.commit();
@@ -89,37 +91,18 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-
+        switch (item.getItemId()){
+            case R.id.action_profile:
+                Intent intent=new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

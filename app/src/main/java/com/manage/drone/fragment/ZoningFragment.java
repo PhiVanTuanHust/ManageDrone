@@ -340,6 +340,5 @@ public class ZoningFragment extends BaseFragment implements
             lstMarkerModel.add(new MarkerModel(marker,lstLatLng));
         }
 
-
     }
 }

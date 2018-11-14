@@ -35,6 +35,9 @@
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".view.ProfileActivity"
+            android:theme="@style/Theme.DesignDemo"
+            android:parentActivityName=".MainActivity"/>
 
     </application>
 
