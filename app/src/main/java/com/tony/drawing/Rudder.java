@@ -63,7 +63,7 @@ public class Rudder extends GLSurfaceView implements Callback {
     private boolean isDraweOK = false;
     private boolean isDrawing = false;
     private boolean isMoving = false;
-    private boolean isRightBallShow = false;
+    private boolean isRightBallShow = true;
     private boolean isStop = false;
     private int l_left = 0;
     private int l_right = 0;
@@ -305,7 +305,8 @@ public class Rudder extends GLSurfaceView implements Callback {
                     fingerUp((float) ((int) event.getX(pointerId)), (float) ((int) event.getY(pointerId)));
                     reDraw();
                 } else if (!Applications.isRightHandMode) {
-                    this.onRudderListener.OnRightRudderUp();
+
+                   this.onRudderListener.OnRightRudderUp();
                     dealRight(p_right_default.x, p_right_default.y);
                 } else if (Applications.isLimitedHigh) {
                     dealRight(p_right_default.x, p_right_default.y);
@@ -407,7 +408,7 @@ public class Rudder extends GLSurfaceView implements Callback {
                             fingerUp((float) ((int) event.getX(pointerId)), (float) ((int) event.getY(pointerId)));
                             reDraw();
                         } else if (!Applications.isRightHandMode) {
-                            this.onRudderListener.OnRightRudderUp();
+                           this.onRudderListener.OnRightRudderUp();
                             dealRight(p_right_default.x, p_right_default.y);
                         } else if (Applications.isLimitedHigh) {
                             dealRight(p_right_default.x, p_right_default.y);
@@ -466,7 +467,7 @@ public class Rudder extends GLSurfaceView implements Callback {
             } else {
                 frontAndBack = 128 - frontAndBack;
             }
-            this.onRudderListener.OnLeftRudder(rotate, frontAndBack);
+           this.onRudderListener.OnLeftRudder(rotate, frontAndBack);
             return;
         }
         xDistance = p_left.x - p_left_default.x;

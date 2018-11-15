@@ -57,7 +57,7 @@ public class Drawer {
         this.mRudder.setHandler(this.handler);
         this.mScreenInfo = new ScreenInfo(this.mActivity);
         this.mDrawingFactory = new DrawingFactory();
-//        this.iv_Main_FlightBall = (ImageView) this.mActivity.findViewById(R.id.iv_lw93main_flightball);
+       this.iv_Main_FlightBall = (ImageView) this.mActivity.findViewById(R.id.iv_lw93main_flightball);
         LayoutParams layoutParams = new LayoutParams(-2, -2);
         this.iv_Main_FlightBall.setLayoutParams(layoutParams);
         setDefaultDrawing(0, drawingColor);

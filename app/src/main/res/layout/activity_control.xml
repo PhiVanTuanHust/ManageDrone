@@ -228,8 +228,6 @@
 
     </LinearLayout>
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -300,5 +298,19 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <com.tony.drawing.Rudder
+        android:id="@+id/rudder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent" />
+
+    <ImageView
+        android:id="@+id/iv_lw93main_flightball"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/aircraft"
+        android:visibility="invisible" />
 
 </RelativeLayout>
