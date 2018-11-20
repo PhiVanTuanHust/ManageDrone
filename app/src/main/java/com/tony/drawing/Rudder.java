@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -229,9 +230,9 @@ public class Rudder extends GLSurfaceView implements Callback {
                             } else {
                                 canvas.drawColor(0, Mode.CLEAR);
                                 canvas.drawBitmap(Rudder.this.bLeft, (float) (Rudder.p_left.x - Rudder.this.bWidth), (float) (Rudder.p_left.y - Rudder.this.bWidth), Rudder.this.mPaint);
-                                if (!Rudder.this.isRightBallShow) {
-                                    canvas.drawBitmap(Rudder.this.bRight, (float) (Rudder.p_right.x - Rudder.this.bWidth), (float) (Rudder.p_right.y - Rudder.this.bWidth), Rudder.this.mPaint);
-                                }
+//                                if (!Rudder.this.isRightBallShow) {
+//                                    canvas.drawBitmap(Rudder.this.bRight, (float) (Rudder.p_right.x - Rudder.this.bWidth), (float) (Rudder.p_right.y - Rudder.this.bWidth), Rudder.this.mPaint);
+//                                }
                                 if (Rudder.this.mHolder != null) {
                                     Rudder.this.mHolder.unlockCanvasAndPost(canvas);
                                 }
@@ -270,6 +271,7 @@ public class Rudder extends GLSurfaceView implements Callback {
         int pointerId = (event.getAction() & MotionEventCompat.ACTION_POINTER_INDEX_MASK) >>> 8;
         int x;
         int y;
+        Log.e("action",count+"");
         switch (event.getAction()) {
             case 0:
                 Applications.isTouchup = false;
