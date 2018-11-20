@@ -106,14 +106,14 @@ public class FlyImageView extends ImageView {
 
     private float getX1(float xO, float yO, float xM, float yM, float r) {
         float a = 0;
-
+        a = (float) (r / (Math.sqrt((Math.pow(xM - xO, 2)) + Math.pow(yM - yO, 2))));
         Log.e("x", (a * (xM - xO) + xO) + "    " + xM + "    " + yM + "   " + a);
         return a * (xM - xO) + xO;
     }
 
     private float getY1(float xO, float yO, float xM, float yM, float r) {
         float a = 0;
-        Log.e("y", (a * (yM - yO) + yO) + "");
+        a = (float) (r / (Math.sqrt((Math.pow(xM - xO, 2)) + Math.pow(yM - yO, 2))));
         return a * (yM - yO) + yO;
     }
 }
