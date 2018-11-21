@@ -17,6 +17,7 @@ public class FlyImageView extends ImageView {
     private int yTouch = 0;
     private float centerX = 0;
     private float centerY = 0;
+    private static int r=54;
 
 
     public FlyImageView(Context context) {
@@ -37,12 +38,11 @@ public class FlyImageView extends ImageView {
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.WHITE);
-        Log.e("xTouch", xTouch + "  yTouch  " + yTouch);
         if (xTouch == 0 && yTouch == 0) {
             init();
-            canvas.drawCircle(centerX, centerY, 50, paint);
+            canvas.drawCircle(centerX, centerY, r, paint);
         } else {
-            canvas.drawCircle((int) xTouch, (int) yTouch, 50, paint);
+            canvas.drawCircle((int) xTouch, (int) yTouch, r, paint);
         }
 
 
@@ -52,7 +52,6 @@ public class FlyImageView extends ImageView {
     public boolean onTouchEvent(MotionEvent event) {
         int centX = getWidth() / 2;
         int centY = getHeight() / 2;
-//        Log.e("onTouchEvent: ", "Left:" + getX() + " Top:" + getY() + " X: " + event.getX() + " Y:" + event.getY() + " RawX:" + event.getRawY() + " RawY:" + event.getRawY());
         xTouch = (int) event.getX();
         yTouch = (int) event.getY();
 
@@ -61,13 +60,13 @@ public class FlyImageView extends ImageView {
         int radius = (int) Math.pow(getWidth() / 2, 2);
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
-                Log.e("action", "up");
+
                 xTouch = 0;
                 yTouch = 0;
                 invalidate();
                 break;
             case MotionEvent.ACTION_DOWN:
-                Log.e("action", "down");
+
                 if (ptx + pty - radius < 0) {
                     invalidate();
                 } else {
@@ -81,17 +80,15 @@ public class FlyImageView extends ImageView {
                 if (ptx + pty - radius < 0) {
                     invalidate();
                 } else {
-                    xTouch = (int) getX1(centX, centY, event.getX(), event.getY(), centX - 50);
-                    yTouch = (int) getY1(centX, centY, event.getX(), event.getY(), centX - 50);
+                    xTouch = (int) getX1(centX, centY, event.getX(), event.getY(), centX - r);
+                    yTouch = (int) getY1(centX, centY, event.getX(), event.getY(), centX - r);
                     invalidate();
                 }
 
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
-                Log.e("action", "ACTION_POINTER_DOWN");
                 break;
             case MotionEvent.ACTION_POINTER_UP:
-                Log.e("action", "ACTION_POINTER_UP");
                 break;
 
         }
@@ -107,7 +104,6 @@ public class FlyImageView extends ImageView {
     private float getX1(float xO, float yO, float xM, float yM, float r) {
         float a = 0;
         a = (float) (r / (Math.sqrt((Math.pow(xM - xO, 2)) + Math.pow(yM - yO, 2))));
-        Log.e("x", (a * (xM - xO) + xO) + "    " + xM + "    " + yM + "   " + a);
         return a * (xM - xO) + xO;
     }
 

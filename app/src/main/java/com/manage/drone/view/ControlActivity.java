@@ -3,14 +3,20 @@ package com.manage.drone.view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.manage.drone.R;
 import com.manage.drone.customs.FlyImageView;
+import com.manage.drone.fragment.ObserveFragment;
 import com.tony.drawing.Applications;
 import com.tony.drawing.Drawer;
 import com.tony.drawing.FlyCtrl;
@@ -24,11 +30,17 @@ import butterknife.OnClick;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class ControlActivity extends BaseActivity implements Rudder.OnRudderListener{
+public class ControlActivity extends BaseActivity {
     @BindView(R.id.frame_back)
     FrameLayout frameBack;
     @BindView(R.id.left_rudder)
     FlyImageView imgControl;
+    @BindView(R.id.ivCamera)
+    RelativeLayout imgCamera;
+    @BindView(R.id.main)
+    RelativeLayout layoutMain;
+    @BindView(R.id.frameView)
+    FrameLayout frameLayout;
 
 
     @Override
@@ -47,27 +59,12 @@ public class ControlActivity extends BaseActivity implements Rudder.OnRudderList
 
     @Override
     protected void initData() {
-//        rudder.setOnRudderListener(this);
-//        rudder.setSpeedLevel(1);
-//        this.mDrawer = new Drawer(this, this.rudder);
-//        mDrawer.stopDrawing();
-//
-        float centreX=imgControl.getX() + imgControl.getWidth()  / 2;
-        float centreY=imgControl.getY() + imgControl.getHeight() / 2;
-        Rect rectf=new Rect();
-        imgControl.getLocalVisibleRect(rectf);
-
-        Log.d("WIDTH        :",centreX+"   "+centreY);
-        Log.d("HEIGHT       :",String.valueOf(imgControl.getMeasuredHeight()));
-        Log.d("left         :",String.valueOf(rectf.left));
-        Log.d("right        :",String.valueOf(rectf.right));
-        Log.d("top          :",String.valueOf(rectf.top));
-        Log.d("bottom       :",String.valueOf(rectf.bottom));
+          getSupportFragmentManager().beginTransaction().replace(R.id.frameView, ObserveFragment.newInstance()).commit();
 
     }
 
     @OnClick(R.id.frame_back)
-    public void onBack(){
+    public void onBack() {
         onBackPressed();
     }
 
@@ -77,41 +74,25 @@ public class ControlActivity extends BaseActivity implements Rudder.OnRudderList
 
     }
 
-    public static void startControl(Context context){
-        Intent intent=new Intent(context,ControlActivity.class);
+    public static void startControl(Context context) {
+        Intent intent = new Intent(context, ControlActivity.class);
         context.startActivity(intent);
     }
 
-    @Override
-    public void OnLeftRudder(int x, int y) {
-        if (!Applications.isRightHandMode) {
-            FlyCtrl.rudderdata[3] = y;
-            FlyCtrl.rudderdata[4] = x;
-        } else if (Applications.isSensorOn) {
-            FlyCtrl.rudderdata[4] = x;
-        } else {
-            FlyCtrl.rudderdata[2] = y;
-            FlyCtrl.rudderdata[4] = x;
-        }
+    @OnClick(R.id.ivCamera)
+    public void onCamera() {
 
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.camera);
+        mediaPlayer.start();
+        capture();
     }
 
-    @Override
-    public void OnRightRudder(int x, int y, boolean highSpeed) {
-        if (!Applications.isRightHandMode) {
-            FlyCtrl.rudderdata[1] = x;
-            FlyCtrl.rudderdata[2] = y;
-        } else if (Applications.isSensorOn) {
-            FlyCtrl.rudderdata[3] = y;
-        } else {
-            FlyCtrl.rudderdata[1] = x;
-            FlyCtrl.rudderdata[3] = y;
-        }
-
-    }
-
-    @Override
-    public void OnRightRudderUp() {
-
+    private void capture() {
+        Animation animation = new AlphaAnimation(1, 0); // Change alpha
+        animation.setDuration(500); // duration - half a second
+        animation.setInterpolator(new LinearInterpolator()); // do not alter
+        animation.setRepeatCount(Animation.RESTART);
+        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at
+        layoutMain.startAnimation(animation);
     }
 }

@@ -336,7 +336,7 @@ public class ZoningFragment extends BaseFragment implements
             LatLng latLng=lstLatLng.get(0);
             lstPosition.add(0);
             Marker marker=mMap.addMarker(new MarkerOptions().position(latLng));
-            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone));
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone2));
             lstMarkerModel.add(new MarkerModel(marker,lstLatLng));
         }
 
