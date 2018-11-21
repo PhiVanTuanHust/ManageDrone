@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:textStyle="bold"
@@ -30,7 +31,6 @@
         android:layout_below="@+id/lbl"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
-
         <EditText
             android:hint="password"
             android:paddingLeft="5dp"
@@ -68,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/btn_cancel"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="Hủy"
@@ -79,6 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/btn_connect"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="Kết nối"
