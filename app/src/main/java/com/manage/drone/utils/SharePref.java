@@ -13,6 +13,7 @@ public class SharePref {
     private static final String NAME_PREFS="tuongtacnguoimay";
     public static final String NAME_SWITCH="switch_send_data";
     public static final String NAME_FIRST_OPEN="first_open";
+    public static final String IS_LOGIN ="is_login";
     public static final String NAME_HEIGHT="height";
     public static final String NAME_SPEED="speed";
 

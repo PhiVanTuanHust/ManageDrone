@@ -89,7 +89,7 @@ public class ControlActivity extends BaseActivity {
 
     private void capture() {
         Animation animation = new AlphaAnimation(1, 0); // Change alpha
-        animation.setDuration(500); // duration - half a second
+        animation.setDuration(200); // duration - half a second
         animation.setInterpolator(new LinearInterpolator()); // do not alter
         animation.setRepeatCount(Animation.RESTART);
         animation.setRepeatMode(Animation.REVERSE); // Reverse animation at
