@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.manage.drone.AppAction;
+import com.manage.drone.AppConstant;
 import com.manage.drone.R;
 import com.manage.drone.adapter.BaseRecycleViewAdapter;
 import com.manage.drone.adapter.ConnectAdapter;
@@ -34,7 +36,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
  * Created by Phí Văn Tuấn on 30/10/2018.
  */
 
-public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdapter.ItemClickListener {
+public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdapter.ItemClickListener ,AppConstant{
     public static ConnectFragment newInstance() {
         Bundle args = new Bundle();
         ConnectFragment fragment = new ConnectFragment();
@@ -82,12 +84,10 @@ public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdap
     private void showDialog(final String title) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        LayoutInflater inflater = (LayoutInflater)
-                getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.dialog_edt, null);
-        TextView tvTitle = view.findViewById(R.id.tvTitle);
-        final EditText edtPass = view.findViewById(R.id.edtPass);
-        final ImageView imgView = view.findViewById(R.id.imgView);
+        dialog.setContentView(R.layout.dialog_edt);
+        TextView tvTitle = dialog.findViewById(R.id.tvTitle);
+        final EditText edtPass = dialog.findViewById(R.id.edtPass);
+        final ImageView imgView = dialog.findViewById(R.id.imgView);
         imgView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -108,26 +108,27 @@ public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdap
                 return true;
             }
         });
-        view.findViewById(R.id.btn_connect).setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.btn_connect).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (edtPass.getText().toString().equals("123456")) {
-                    dialog.dismiss();
+
                     Toast.makeText(getContext(), "Kết nối thành công với Drone " + title, Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    bus.post(AppAction.DONE_STEP_1);
                 } else {
                     Toast.makeText(getContext(), "Mật khẩu chưa đúng, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     dialog.dismiss();
             }
         });
         tvTitle.setText(title);
-        dialog.setContentView(view);
         dialog.show();
     }
 

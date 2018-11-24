@@ -30,7 +30,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
         android:padding="5dp"
-        android:src="@drawable/wifi" />
+        android:src="@drawable/wifi_5" />
     <View
         android:id="@+id/divider"
         android:layout_marginLeft="20dp"
