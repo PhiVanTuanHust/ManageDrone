@@ -28,7 +28,7 @@
          android:layout_toRightOf="@+id/tvTitle"
          android:layout_height="wrap_content">
          <EditText
-             android:text="50"
+             android:text=""
              android:id="@+id/edtHeight"
              android:inputType="number"
              android:layout_margin="10dp"
@@ -64,7 +64,7 @@
             android:layout_toRightOf="@+id/tvTitleSpeed"
             android:layout_height="wrap_content">
             <EditText
-                android:text="50"
+                android:text=""
                 android:id="@+id/edtSpeed"
                 android:inputType="number"
                 android:layout_margin="10dp"

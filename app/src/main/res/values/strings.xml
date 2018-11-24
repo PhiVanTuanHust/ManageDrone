@@ -29,4 +29,8 @@
     <!--<string name="group_8"> Phát lại các thông tin đã nạp </string>-->
     <!--<string name="group_9"> So khớp hình ảnh </string>-->
 
+    <string name="step_1">Kết nối drone</string>
+    <string name="step_2">Cấu hình drone</string>
+    <string name="step_3">Bắt đầu</string>
+
 </resources>

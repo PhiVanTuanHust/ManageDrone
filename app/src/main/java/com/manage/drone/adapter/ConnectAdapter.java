@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -91,11 +92,13 @@ public class ConnectAdapter extends BaseRecycleViewAdapter {
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         View divider;
+        ImageView imgWifi;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.tvDrone);
             divider = itemView.findViewById(R.id.divider);
+            imgWifi = itemView.findViewById(R.id.imgWifi);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
