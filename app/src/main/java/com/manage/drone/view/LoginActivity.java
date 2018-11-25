@@ -40,7 +40,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        if (!pref.getBooleanValue(SharePref.IS_LOGIN)){
+        if (!pref.getBooleanValue(SharePref.NOT_LOGIN)){
             onLoginSuccess();
             return;
         }
@@ -106,7 +106,7 @@ public class LoginActivity extends BaseActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        pref.putBoolean(SharePref.IS_LOGIN,false);
+        pref.putBoolean(SharePref.NOT_LOGIN,false);
        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
        startActivity(intent);
        finish();

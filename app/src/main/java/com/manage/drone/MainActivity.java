@@ -3,7 +3,6 @@ package com.manage.drone;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.os.Environment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -28,9 +27,8 @@ import com.manage.drone.fragment.ZoningFragment;
 import com.manage.drone.utils.SharePref;
 import com.manage.drone.view.ControlActivity;
 import com.manage.drone.view.GuideActivity;
+import com.manage.drone.view.LoginActivity;
 import com.manage.drone.view.ProfileActivity;
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,6 +94,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_profile:
                 Intent intent=new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.action_logout:
+                Intent intent2=new Intent(MainActivity.this, LoginActivity.class);
+                SharePref pref=new SharePref(this);
+                pref.putBoolean(SharePref.NOT_LOGIN,true);
+                startActivity(intent2);
                 break;
         }
         return super.onOptionsItemSelected(item);

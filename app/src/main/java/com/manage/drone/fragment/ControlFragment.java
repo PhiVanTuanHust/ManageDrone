@@ -34,6 +34,7 @@ public class ControlFragment extends BaseFragment implements
     private static final int WHAT_MARKER = 0;
     private GoogleMap mMap;
     private Marker marker;
+    private CameraPosition cameraPosition;
     private LatLng latLng = new LatLng(55.40441324369938, 89.46476418524982);
 
     public static ControlFragment newInstance() {
@@ -44,6 +45,7 @@ public class ControlFragment extends BaseFragment implements
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected int getLayoutRes() {
         return R.layout.control_fragment;
@@ -54,8 +56,10 @@ public class ControlFragment extends BaseFragment implements
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        if (mMap != null)
+        if (mMap != null) {
             mMap.getUiSettings().setRotateGesturesEnabled(false);
+        }
+
     }
 
     @Override
@@ -84,8 +88,8 @@ public class ControlFragment extends BaseFragment implements
         googleMap.getUiSettings().setTiltGesturesEnabled(false);
         googleMap.getUiSettings().setCompassEnabled(true);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
-
-        CameraPosition cameraPosition = new CameraPosition.Builder()
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+        cameraPosition = new CameraPosition.Builder()
                 .target(latLng)      // Sets the center of the map to location user
                 .zoom(17)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
@@ -102,10 +106,11 @@ public class ControlFragment extends BaseFragment implements
     public void animateMarker() {
 
 
-        LatLng latLng=marker.getPosition();
-        double lng = latLng.longitude + 0.001;
-        double lat = latLng.latitude + 0.001;
+        LatLng latLng = marker.getPosition();
+        double lng = latLng.longitude + 0.000000001;
+        double lat = latLng.latitude + 0.0000000001;
         marker.setPosition(new LatLng(lat, lng));
+
         mHandler.sendEmptyMessageDelayed(WHAT_MARKER, 100);
     }
 
