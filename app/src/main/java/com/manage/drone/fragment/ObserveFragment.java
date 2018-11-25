@@ -2,6 +2,7 @@ package com.manage.drone.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Interpolator;
@@ -35,6 +37,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.manage.drone.MainActivity;
 import com.manage.drone.R;
 import com.manage.drone.utils.Const;
+import com.manage.drone.utils.ViewUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -151,6 +154,8 @@ public class ObserveFragment extends BaseFragment implements
             mMap.setOnMarkerClickListener(this);
             animateMarker(0);
 
+        }else {
+            ViewUtil.showAlertDialog((MainActivity)getActivity());
         }
 
     }
@@ -197,6 +202,5 @@ public class ObserveFragment extends BaseFragment implements
         oldMarker.setPosition(new LatLng(lat, lng));
         mHandler.sendEmptyMessageDelayed(WHAT_MARKER, 100);
     }
-
 
 }

@@ -11,7 +11,7 @@
     <color name="colorSwitch">#46bdbf</color>
 
     <color name="colorTextHint">#8c8c8c</color>
-
+    <color name="navi_bg">#303030</color>
     <color name="colorYellow">#FFEB3B</color>
     <color name="google_red">#ea5a4f</color>
     <color name="google_blue">#6099f5</color>

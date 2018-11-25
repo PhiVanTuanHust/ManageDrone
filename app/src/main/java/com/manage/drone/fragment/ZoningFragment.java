@@ -331,12 +331,18 @@ public class ZoningFragment extends BaseFragment implements
 
         set=Const.getLatLng(getActivity());
         lstPosition=new ArrayList<>();
+
         lstMarkerModel=new ArrayList<>();
         for (List<LatLng> lstLatLng:set){
             LatLng latLng=lstLatLng.get(0);
             lstPosition.add(0);
             Marker marker=mMap.addMarker(new MarkerOptions().position(latLng));
-            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone2));
+            if (lstPosition.size()==1){
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone));
+            }else {
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone2));
+            }
+
             lstMarkerModel.add(new MarkerModel(marker,lstLatLng));
         }
 
