@@ -14,15 +14,15 @@
     android:gravity="center"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
-    <Button
+    <ImageView
         android:id="@+id/btnStart"
-        android:text="Start"
 
+        android:src="@drawable/start"
         android:layout_marginBottom="30dp"
         android:layout_above="@+id/tvTitle"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="56dp"
+        android:layout_height="56dp" />
     <TextView
         android:textColor="@color/colorTextBlack"
         android:id="@+id/tvTitle"

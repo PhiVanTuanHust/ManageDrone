@@ -17,6 +17,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
+        app:piv_interactiveAnimation="true"
+        app:piv_selectedColor="@color/colorYellow"
+        app:piv_unselectedColor="@color/colorTextHint"
         attrs:piv_padding="12dp"
         attrs:piv_radius="8dp" />
 </RelativeLayout>

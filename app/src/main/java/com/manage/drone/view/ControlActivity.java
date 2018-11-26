@@ -216,6 +216,7 @@ public class ControlActivity extends BaseActivity {
         }
         isRecord=!isRecord;
     }
+
     private Handler mHandler=new Handler(){
 
         @Override
@@ -237,9 +238,15 @@ public class ControlActivity extends BaseActivity {
         int second = seconds - minute*60;
         return  (minute < 10 ? ("0" +minute) : minute) + ":" + (second < 10 ? ("0" + second): second);
     }
+
     private void setTime(){
         tvTime.setText(convertTime(time));
         time=time+1;
         mHandler.sendEmptyMessageDelayed(0,1000);
+    }
+
+    @OnClick(R.id.frameView)
+    public void onZoom(){
+
     }
 }
