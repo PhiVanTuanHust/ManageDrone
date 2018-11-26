@@ -7,8 +7,15 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/lblListItem"
-        android:layout_width="match_parent"
+        android:textIsSelectable="true"
+        android:id="@+id/tvAnswer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="2dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:textColor="@color/colorTextHint"
+        android:textSize="17sp" />
+
 </LinearLayout>
