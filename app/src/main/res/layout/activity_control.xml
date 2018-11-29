@@ -4,8 +4,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg">
-
+    >
+    <com.manage.drone.control.PanoramaImageView
+        android:id="@+id/imgBackGround"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <LinearLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"

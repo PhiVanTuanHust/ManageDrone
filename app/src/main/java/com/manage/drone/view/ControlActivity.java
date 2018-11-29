@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.github.anastr.speedviewlib.PointerSpeedometer;
 import com.manage.drone.R;
+import com.manage.drone.control.GyroscopeObserver;
+import com.manage.drone.control.PanoramaImageView;
 import com.manage.drone.customs.FlyImageView;
 import com.manage.drone.fragment.ControlFragment;
 import com.manage.drone.fragment.ObserveFragment;
@@ -37,27 +39,47 @@ import butterknife.OnClick;
  * status bar and navigation/system bar) with user interaction.
  */
 public class ControlActivity extends BaseActivity {
-    @BindView(R.id.frame_back) FrameLayout frameBack;
-    @BindView(R.id.left_rudder) FlyImageView imgControl;
-    @BindView(R.id.ivCamera) RelativeLayout imgCamera;
-    @BindView(R.id.ivVideo) RelativeLayout viewVideo;
-    @BindView(R.id.layout_record) LinearLayout viewRecord;
-    @BindView(R.id.imgVideo) ImageView imgVideo;
-    @BindView(R.id.main) RelativeLayout layoutMain;
-    @BindView(R.id.frameView) FrameLayout frameLayout;
-    @BindView(R.id.viewSpeed) PointerSpeedometer speedView;
-    @BindView(R.id.tvHeight) TextView tvHeight;
-    @BindView(R.id.tvName) TextView tvName;
-    @BindView(R.id.tvSpeed) TextView tvSpeed;
-    @BindView(R.id.layout_info) LinearLayout layout_info;
-    @BindView(R.id.imgUpSpeed) ImageView imgSpeedUp;
-    @BindView(R.id.imgDownSpeed) ImageView imgSpeedDown;
-    @BindView(R.id.tvTime) TextView tvTime;
+    @BindView(R.id.frame_back)
+    FrameLayout frameBack;
+    @BindView(R.id.left_rudder)
+    FlyImageView imgControl;
+    @BindView(R.id.ivCamera)
+    RelativeLayout imgCamera;
+    @BindView(R.id.ivVideo)
+    RelativeLayout viewVideo;
+    @BindView(R.id.layout_record)
+    LinearLayout viewRecord;
+    @BindView(R.id.imgVideo)
+    ImageView imgVideo;
+    @BindView(R.id.main)
+    RelativeLayout layoutMain;
+    @BindView(R.id.frameView)
+    FrameLayout frameLayout;
+    @BindView(R.id.viewSpeed)
+    PointerSpeedometer speedView;
+    @BindView(R.id.tvHeight)
+    TextView tvHeight;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvSpeed)
+    TextView tvSpeed;
+    @BindView(R.id.layout_info)
+    LinearLayout layout_info;
+    @BindView(R.id.imgUpSpeed)
+    ImageView imgSpeedUp;
+    @BindView(R.id.imgDownSpeed)
+    ImageView imgSpeedDown;
+    @BindView(R.id.tvTime)
+    TextView tvTime;
     private Thread thread;
-    private int time=0;
-    private float unitHeight=0.5f;
-    private float unitSpeed=0.5f;
-    private boolean isRecord=false;
+    private int time = 0;
+    private float unitHeight = 0.5f;
+    private float height=0.0f;
+    private float unitSpeed = 0.5f;
+    private boolean isRecord = false;
+    private GyroscopeObserver gyroscopeObserver;
+    @BindView(R.id.imgBackGround)
+    PanoramaImageView imgBackGround;
 
 
     @Override
@@ -82,7 +104,9 @@ public class ControlActivity extends BaseActivity {
         speedView.setMaxSpeed(100);
         speedView.setWithPointer(false);
         speedView.setUnit("Km/h");
+        gyroscopeObserver = new GyroscopeObserver();
 
+        imgBackGround.setGyroscopeObserver(gyroscopeObserver);
         hideView();
 
     }
@@ -119,11 +143,11 @@ public class ControlActivity extends BaseActivity {
         view.startAnimation(animation);
     }
 
-    private void hideView(){
-        if (thread!=null&&thread.isAlive()){
+    private void hideView() {
+        if (thread != null && thread.isAlive()) {
             thread.interrupt();
         }
-         thread = new Thread() {
+        thread = new Thread() {
             @Override
             public void run() {
                 try {
@@ -136,7 +160,7 @@ public class ControlActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                       layout_info.setVisibility(View.INVISIBLE);
+                        layout_info.setVisibility(View.INVISIBLE);
                     }
                 });
             }
@@ -145,108 +169,113 @@ public class ControlActivity extends BaseActivity {
     }
 
     @OnClick(R.id.ivFlyUp)
-    public void onFlyUp(){
-        if (layout_info.getVisibility()!=View.VISIBLE){
+    public void onFlyUp() {
+        if (layout_info.getVisibility() != View.VISIBLE) {
             layout_info.setVisibility(View.VISIBLE);
             hideView();
         }
-        float height=getHeight(tvHeight.getText().toString().replace("m",""))+unitHeight;
-        tvHeight.setText(height+"m");
+        height=height+0.1f;
+        gyroscopeObserver.updateHeight(height);
+        float height = getHeight(tvHeight.getText().toString().replace("m", "")) + unitHeight;
+        tvHeight.setText(height + "m");
     }
 
     @OnClick(R.id.ivFlyDown)
-    public void onFlyDown(){
-        if (layout_info.getVisibility()!=View.VISIBLE){
+    public void onFlyDown() {
+        if (layout_info.getVisibility() != View.VISIBLE) {
             layout_info.setVisibility(View.VISIBLE);
             hideView();
         }
-        float height=getHeight(tvHeight.getText().toString().replace("m",""))-unitHeight;
-        tvHeight.setText(height+"m");
+        height=height-0.1f;
+        gyroscopeObserver.updateHeight(height);
+        float height = getHeight(tvHeight.getText().toString().replace("m", "")) - unitHeight;
+        tvHeight.setText(height + "m");
 
     }
 
-    private float getHeight(String text){
+    private float getHeight(String text) {
         try {
-            Float f=Float.parseFloat(text);
+            Float f = Float.parseFloat(text);
             return f;
-        }catch (Exception e){
+        } catch (Exception e) {
             return 25.0f;
         }
     }
 
     @OnClick(R.id.imgDownSpeed)
-    public void onSpeedDown(){
+    public void onSpeedDown() {
         capture(imgSpeedDown);
-        if (layout_info.getVisibility()!=View.VISIBLE){
+        if (layout_info.getVisibility() != View.VISIBLE) {
             layout_info.setVisibility(View.VISIBLE);
             hideView();
         }
-        float speed=speedView.getSpeed()-unitSpeed;
+        float speed = speedView.getSpeed() - unitSpeed;
         speedView.setSpeedAt(speed);
-        tvSpeed.setText(speed+"km/h");
+        tvSpeed.setText(speed + "km/h");
     }
 
     @OnClick(R.id.imgUpSpeed)
-    public void onSpeedUp(){
+    public void onSpeedUp() {
 
         capture(imgSpeedUp);
-        if (layout_info.getVisibility()!=View.VISIBLE){
+        if (layout_info.getVisibility() != View.VISIBLE) {
             layout_info.setVisibility(View.VISIBLE);
             hideView();
         }
-        float speed= speedView.getSpeed()+unitSpeed;
+        float speed = speedView.getSpeed() + unitSpeed;
         speedView.setSpeedAt(speed);
-        tvSpeed.setText(speed+"km/h");
+        tvSpeed.setText(speed + "km/h");
 
     }
 
     @OnClick(R.id.ivVideo)
-    public void onVideo(){
-        if (isRecord){
+    public void onVideo() {
+        if (isRecord) {
             mHandler.removeMessages(0);
-            mHandler.sendEmptyMessageDelayed(1,0);
-            time=0;
+            mHandler.sendEmptyMessageDelayed(1, 0);
+            time = 0;
             viewRecord.setVisibility(View.GONE);
             imgVideo.setImageResource(R.drawable.videodis);
-            Toast.makeText(this,"Video của bạn đã được lưu",Toast.LENGTH_SHORT).show();
-        }else {
+            Toast.makeText(this, "Video của bạn đã được lưu", Toast.LENGTH_SHORT).show();
+        } else {
             viewRecord.setVisibility(View.VISIBLE);
             setTime();
             imgVideo.setImageResource(R.drawable.stop);
         }
-        isRecord=!isRecord;
+        isRecord = !isRecord;
     }
 
-    private Handler mHandler=new Handler(){
+    private Handler mHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
                     setTime();
                     break;
                 case 1:
-                    time=0;
+                    time = 0;
                     break;
             }
 
 
         }
     };
-    private String convertTime(int seconds){
-        int minute = seconds/60;
-        int second = seconds - minute*60;
-        return  (minute < 10 ? ("0" +minute) : minute) + ":" + (second < 10 ? ("0" + second): second);
+
+    private String convertTime(int seconds) {
+        int minute = seconds / 60;
+        int second = seconds - minute * 60;
+        return (minute < 10 ? ("0" + minute) : minute) + ":" + (second < 10 ? ("0" + second) : second);
     }
 
-    private void setTime(){
+    private void setTime() {
         tvTime.setText(convertTime(time));
-        time=time+1;
-        mHandler.sendEmptyMessageDelayed(0,1000);
+        time = time + 1;
+        mHandler.sendEmptyMessageDelayed(0, 1000);
     }
 
     @OnClick(R.id.frameView)
-    public void onZoom(){
+    public void onZoom() {
 
     }
 }
