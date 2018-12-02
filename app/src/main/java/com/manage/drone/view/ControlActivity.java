@@ -28,6 +28,8 @@ import com.manage.drone.control.PanoramaImageView;
 import com.manage.drone.customs.FlyImageView;
 import com.manage.drone.fragment.ControlFragment;
 import com.manage.drone.fragment.ObserveFragment;
+import com.manage.drone.utils.Const;
+import com.manage.drone.utils.ViewUtil;
 
 
 import butterknife.BindView;
@@ -74,10 +76,11 @@ public class ControlActivity extends BaseActivity {
     private Thread thread;
     private int time = 0;
     private float unitHeight = 0.5f;
-    private float height=0.0f;
+    private float height = 0.0f;
     private float unitSpeed = 0.5f;
     private boolean isRecord = false;
     private GyroscopeObserver gyroscopeObserver;
+    private boolean isHide = false;
     @BindView(R.id.imgBackGround)
     PanoramaImageView imgBackGround;
 
@@ -105,7 +108,7 @@ public class ControlActivity extends BaseActivity {
         speedView.setWithPointer(false);
         speedView.setUnit("Km/h");
         gyroscopeObserver = new GyroscopeObserver();
-
+        imgControl.setObserver(gyroscopeObserver);
         imgBackGround.setGyroscopeObserver(gyroscopeObserver);
         hideView();
 
@@ -144,7 +147,7 @@ public class ControlActivity extends BaseActivity {
     }
 
     private void hideView() {
-        if (thread != null && thread.isAlive()) {
+        if (thread != null) {
             thread.interrupt();
         }
         thread = new Thread() {
@@ -152,7 +155,6 @@ public class ControlActivity extends BaseActivity {
             public void run() {
                 try {
                     Thread.sleep(3000);
-
                 } catch (InterruptedException e) {
 
                 }
@@ -160,7 +162,8 @@ public class ControlActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        layout_info.setVisibility(View.INVISIBLE);
+                        isHide = true;
+                        createAnimation();
                     }
                 });
             }
@@ -170,11 +173,9 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.ivFlyUp)
     public void onFlyUp() {
-        if (layout_info.getVisibility() != View.VISIBLE) {
-            layout_info.setVisibility(View.VISIBLE);
-            hideView();
-        }
-        height=height+0.1f;
+
+        animation();
+        height = height + 0.1f;
         gyroscopeObserver.updateHeight(height);
         float height = getHeight(tvHeight.getText().toString().replace("m", "")) + unitHeight;
         tvHeight.setText(height + "m");
@@ -182,11 +183,8 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.ivFlyDown)
     public void onFlyDown() {
-        if (layout_info.getVisibility() != View.VISIBLE) {
-            layout_info.setVisibility(View.VISIBLE);
-            hideView();
-        }
-        height=height-0.1f;
+        animation();
+        height = height - 0.1f;
         gyroscopeObserver.updateHeight(height);
         float height = getHeight(tvHeight.getText().toString().replace("m", "")) - unitHeight;
         tvHeight.setText(height + "m");
@@ -204,9 +202,10 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.imgDownSpeed)
     public void onSpeedDown() {
+        animation();
         capture(imgSpeedDown);
         if (layout_info.getVisibility() != View.VISIBLE) {
-            layout_info.setVisibility(View.VISIBLE);
+            createAnimation();
             hideView();
         }
         float speed = speedView.getSpeed() - unitSpeed;
@@ -216,10 +215,10 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.imgUpSpeed)
     public void onSpeedUp() {
-
+        animation();
         capture(imgSpeedUp);
         if (layout_info.getVisibility() != View.VISIBLE) {
-            layout_info.setVisibility(View.VISIBLE);
+            createAnimation();
             hideView();
         }
         float speed = speedView.getSpeed() + unitSpeed;
@@ -277,5 +276,21 @@ public class ControlActivity extends BaseActivity {
     @OnClick(R.id.frameView)
     public void onZoom() {
 
+    }
+
+    private void createAnimation() {
+        Animation animation = isHide ? new TranslateAnimation(0, 0.0f, 0, 0.0f, 0, 0.0f, 0, (float) (-ViewUtil.dip2px(this, 120.0f))) : new TranslateAnimation(0, 0.0f, 0, 0.0f, 0, (float) (-ViewUtil.dip2px(this, 120.0f)), 0, 0.0f);
+        animation.setDuration(500);
+        animation.setFillAfter(true);
+        layout_info.startAnimation(animation);
+
+    }
+
+    private void animation() {
+        if (isHide) {
+            isHide = false;
+            createAnimation();
+            hideView();
+        }
     }
 }

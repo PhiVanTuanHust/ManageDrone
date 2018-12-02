@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 } else if (groupPosition == 6) {
                     if (childPosition == 0) {
-                        GuideActivity.startGuide(MainActivity.this);
+                        switchFragment(GuideActivity.newInstance());
                     } else {
                         switchFragment(QuestionFragment.newInstance());
                     }

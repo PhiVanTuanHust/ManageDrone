@@ -59,6 +59,5 @@ public class GuideFragment extends BaseFragment {
         guide= Const.getGuide(getActivity()).get(getArguments().getInt("position"));
         Glide.with(this).load(guide.getResDrawable()).into(imgGuide);
         tvTitle.setText(guide.getTitle());
-//        view.setBackgroundColor(getResources().getColor(guide.getResColor()));
     }
 }

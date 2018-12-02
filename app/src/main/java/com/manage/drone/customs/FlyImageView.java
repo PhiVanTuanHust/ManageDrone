@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import com.manage.drone.control.GyroscopeObserver;
+
 @SuppressLint("AppCompatCustomView")
 public class FlyImageView extends ImageView {
     private int xTouch = 0;
@@ -18,7 +20,11 @@ public class FlyImageView extends ImageView {
     private float centerX = 0;
     private float centerY = 0;
     private static int r=54;
+    private GyroscopeObserver observer;
 
+    public void setObserver(GyroscopeObserver observer) {
+        this.observer = observer;
+    }
 
     public FlyImageView(Context context) {
         super(context);
@@ -78,13 +84,12 @@ public class FlyImageView extends ImageView {
             case MotionEvent.ACTION_MOVE:
 
                 if (ptx + pty - radius < 0) {
-                    invalidate();
                 } else {
                     xTouch = (int) getX1(centX, centY, event.getX(), event.getY(), centX - r);
                     yTouch = (int) getY1(centX, centY, event.getX(), event.getY(), centX - r);
-                    invalidate();
                 }
-
+                observer.updateHeight(getCosineAOB(xTouch,yTouch));
+                invalidate();
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 break;
@@ -111,5 +116,22 @@ public class FlyImageView extends ImageView {
         float a = 0;
         a = (float) (r / (Math.sqrt((Math.pow(xM - xO, 2)) + Math.pow(yM - yO, 2))));
         return a * (yM - yO) + yO;
+    }
+
+    /**
+     *
+     * @param xA
+     * @param yA
+     * OA.OB.cosAOB=vecOA.vecOB
+     * OA=(xA-x0)
+     * @return
+     */
+    private float getCosineAOB(float xA,float yA){
+        float xO=(getWidth()/2);
+        float yO=(getHeight()/2);
+        float xB=getWidth();
+        float yB=yO;
+        float cosine=(float)(((xA-xO)*(yA-yO)+(xB-xO)*(yB-yO))/(Math.sqrt(Math.pow(xA-xO,2)+Math.pow(yA-yO,2)))/(Math.sqrt(Math.pow(xB-xO,2)+Math.pow(yB-yO,2))));
+        return cosine;
     }
 }

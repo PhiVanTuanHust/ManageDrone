@@ -24,4 +24,11 @@ public class GyroscopeObserver {
             }
         }
     }
+    public void updateLeftRight(float coordinate) {
+        for (PanoramaImageView view : mViews) {
+            if (view != null && view.getOrientation() == PanoramaImageView.ORIENTATION_HORIZONTAL) {
+                view.updateProgress(coordinate);
+            }
+        }
+    }
 }

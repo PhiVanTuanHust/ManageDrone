@@ -68,7 +68,7 @@ public class PanoramaImageView extends ImageView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PanoramaImageView);
         mEnablePanoramaMode = typedArray.getBoolean(R.styleable.PanoramaImageView_piv_enablePanoramaMode, true);
         mInvertScrollDirection = typedArray.getBoolean(R.styleable.PanoramaImageView_piv_invertScrollDirection, false);
-        mEnableScrollbar = typedArray.getBoolean(R.styleable.PanoramaImageView_piv_show_scrollbar, true);
+        mEnableScrollbar = typedArray.getBoolean(R.styleable.PanoramaImageView_piv_show_scrollbar, false);
         typedArray.recycle();
 
         if (mEnableScrollbar) {
