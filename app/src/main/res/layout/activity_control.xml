@@ -13,23 +13,16 @@
         android:layout_height="match_parent" />
     <LinearLayout
         android:id="@+id/layout_top"
+        android:background="@drawable/top_btn_bg"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal">
 
         <FrameLayout
             android:id="@+id/frame_back"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
-            android:paddingRight="1dp">
-
-            <ImageView
-                android:id="@+id/imgBack"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/top_btn_bg" />
+            android:padding="5dp">
 
             <ImageView
                 android:layout_gravity="center_vertical"
@@ -40,6 +33,17 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/main_back" />
         </FrameLayout>
+
+
+            <ImageView
+                android:padding="5dp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/imgAI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/track" />
 
     </LinearLayout>
 
@@ -122,7 +126,7 @@
         android:layout_toRightOf="@+id/layout_left">
 
         <com.manage.drone.customs.FlyImageView
-            android:id="@+id/left_rudder"
+            android:id="@+id/control_view"
             android:layout_width="170dp"
             android:layout_height="170dp"
             android:layout_marginBottom="10dp"
