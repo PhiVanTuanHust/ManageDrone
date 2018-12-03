@@ -52,9 +52,7 @@ public class StartFragment extends BaseFragment implements AppConstant {
             if (getArguments().getInt("type") == FIRST) {
                 tvTitle.setText(getActivity().getResources().getString(R.string.first));
                 ((MainActivity) getActivity()).switchFragment(StepFragment.newInstance());
-            } else if (getArguments().getInt("type") == END){
-                ControlActivity.startControl(getActivity());
-            }else {
+            } else {
                 bus.post(AppAction.CHECK_STEP);
             }
 

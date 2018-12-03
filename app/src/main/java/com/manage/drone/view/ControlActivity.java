@@ -2,12 +2,10 @@ package com.manage.drone.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -27,8 +25,6 @@ import com.manage.drone.control.GyroscopeObserver;
 import com.manage.drone.control.PanoramaImageView;
 import com.manage.drone.customs.FlyImageView;
 import com.manage.drone.fragment.ControlFragment;
-import com.manage.drone.fragment.ObserveFragment;
-import com.manage.drone.utils.Const;
 import com.manage.drone.utils.ViewUtil;
 
 
@@ -41,38 +37,24 @@ import butterknife.OnClick;
  * status bar and navigation/system bar) with user interaction.
  */
 public class ControlActivity extends BaseActivity {
-    @BindView(R.id.frame_back)
-    FrameLayout frameBack;
-    @BindView(R.id.left_rudder)
-    FlyImageView imgControl;
-    @BindView(R.id.ivCamera)
-    RelativeLayout imgCamera;
-    @BindView(R.id.ivVideo)
-    RelativeLayout viewVideo;
-    @BindView(R.id.layout_record)
-    LinearLayout viewRecord;
-    @BindView(R.id.imgVideo)
-    ImageView imgVideo;
-    @BindView(R.id.main)
-    RelativeLayout layoutMain;
-    @BindView(R.id.frameView)
-    FrameLayout frameLayout;
-    @BindView(R.id.viewSpeed)
-    PointerSpeedometer speedView;
-    @BindView(R.id.tvHeight)
-    TextView tvHeight;
-    @BindView(R.id.tvName)
-    TextView tvName;
-    @BindView(R.id.tvSpeed)
-    TextView tvSpeed;
-    @BindView(R.id.layout_info)
-    LinearLayout layout_info;
-    @BindView(R.id.imgUpSpeed)
-    ImageView imgSpeedUp;
-    @BindView(R.id.imgDownSpeed)
-    ImageView imgSpeedDown;
-    @BindView(R.id.tvTime)
-    TextView tvTime;
+    @BindView(R.id.frame_back) FrameLayout frameBack;
+    @BindView(R.id.control_view) FlyImageView imgControl;
+    @BindView(R.id.ivCamera) RelativeLayout imgCamera;
+    @BindView(R.id.ivVideo) RelativeLayout viewVideo;
+    @BindView(R.id.layout_record) LinearLayout viewRecord;
+    @BindView(R.id.imgVideo) ImageView imgVideo;
+    @BindView(R.id.main) RelativeLayout layoutMain;
+    @BindView(R.id.frameView) FrameLayout frameLayout;
+    @BindView(R.id.viewSpeed) PointerSpeedometer speedView;
+    @BindView(R.id.tvHeight) TextView tvHeight;
+    @BindView(R.id.tvName) TextView tvName;
+    @BindView(R.id.tvSpeed) TextView tvSpeed;
+    @BindView(R.id.layout_info) LinearLayout layout_info;
+    @BindView(R.id.imgUpSpeed) ImageView imgSpeedUp;
+    @BindView(R.id.imgDownSpeed) ImageView imgSpeedDown;
+    @BindView(R.id.tvTime) TextView tvTime;
+    @BindView(R.id.imgAI) ImageView imgAI;
+    private boolean isAI=false;
     private Thread thread;
     private int time = 0;
     private float unitHeight = 0.5f;
@@ -83,7 +65,7 @@ public class ControlActivity extends BaseActivity {
     private boolean isHide = false;
     @BindView(R.id.imgBackGround)
     PanoramaImageView imgBackGround;
-
+    @BindView(R.id.layout_right) LinearLayout layoutRight;
 
     @Override
     protected int getLayoutRes() {
@@ -217,10 +199,6 @@ public class ControlActivity extends BaseActivity {
     public void onSpeedUp() {
         animation();
         capture(imgSpeedUp);
-        if (layout_info.getVisibility() != View.VISIBLE) {
-            createAnimation();
-            hideView();
-        }
         float speed = speedView.getSpeed() + unitSpeed;
         speedView.setSpeedAt(speed);
         tvSpeed.setText(speed + "km/h");
@@ -285,12 +263,44 @@ public class ControlActivity extends BaseActivity {
         layout_info.startAnimation(animation);
 
     }
+    @OnClick(R.id.imgAI)
+    public void onAI(){
+        isAI=!isAI;
+        if (isAI){
+            AIControl();
+        }else {
+            HandControl();
+        }
 
+    }
     private void animation() {
         if (isHide) {
             isHide = false;
             createAnimation();
             hideView();
         }
+    }
+
+    private void AIControl(){
+        imgControl.setVisibility(View.GONE);
+        imgAI.setImageResource(R.drawable.robot);
+        Animation animation =  new TranslateAnimation(0, 0.0f, 0, 0.0f, 0, (float) (-ViewUtil.dip2px(this, 120.0f)), 0, 0.0f);
+        animation.setDuration(500);
+        animation.setFillAfter(true);
+        speedView.setSpeedAt(50);
+        layout_info.startAnimation(animation);
+        imgSpeedUp.setVisibility(View.GONE);
+        imgSpeedDown.setVisibility(View.GONE);
+        layoutRight.setVisibility(View.GONE);
+    }
+
+    private void HandControl(){
+        imgControl.setVisibility(View.VISIBLE);
+        imgAI.setImageResource(R.drawable.track);
+//        layout_info.setVisibility(View.VISIBLE);
+
+        imgSpeedUp.setVisibility(View.VISIBLE);
+        imgSpeedDown.setVisibility(View.VISIBLE);
+        layoutRight.setVisibility(View.VISIBLE);
     }
 }
