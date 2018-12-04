@@ -6,8 +6,8 @@ package com.manage.drone.models;
 
 public class ItemConnect extends BaseItemModel {
 
-    public  ItemConnect(String title){
-        super(title);
+    public  ItemConnect(String title,boolean isConnect){
+        super(title,isConnect);
     }
 
     @Override

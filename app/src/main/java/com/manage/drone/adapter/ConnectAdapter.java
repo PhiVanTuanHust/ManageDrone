@@ -10,12 +10,15 @@ import android.widget.TextView;
 
 import com.manage.drone.R;
 import com.manage.drone.models.BaseItemModel;
+import com.manage.drone.models.HeaderConnect;
+import com.manage.drone.models.ItemConnect;
 import com.manage.drone.utils.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.manage.drone.models.BaseItemModel.TYPE_HEADER;
+import static com.manage.drone.models.BaseItemModel.TYPE_ITEM;
 
 /**
  * Created by Phí Văn Tuấn on 30/10/2018.
@@ -25,10 +28,12 @@ public class ConnectAdapter extends BaseRecycleViewAdapter {
 
     private List<BaseItemModel> clone = new ArrayList<>();
     private Context context;
+    private List<BaseItemModel> connected;
 
     public ConnectAdapter(Context context, ItemClickListener itemClickListener) {
         super(context, itemClickListener);
         this.context = context;
+        connected = new ArrayList<>();
     }
 
     @Override
@@ -80,6 +85,78 @@ public class ConnectAdapter extends BaseRecycleViewAdapter {
         this.clone.addAll(items);
         super.replace(items);
 
+    }
+
+    public void connectDrone(String key) {
+        for (BaseItemModel baseItemModel : mItems) {
+            if (baseItemModel.getTitle().toLowerCase().equals(key.toLowerCase())) {
+                baseItemModel.setConnect(true);
+                updateConnect();
+                break;
+            }
+        }
+    }
+
+    public void updateConnect() {
+
+        List<BaseItemModel> connecteds = getListConnect();
+        List<BaseItemModel> notConnecteds = getListNotConnected();
+        mItems.clear();
+        if (!connecteds.isEmpty()) {
+            mItems.add(new HeaderConnect("Đang kết nối"));
+            mItems.addAll(connecteds);
+
+        }
+        if (!notConnecteds.isEmpty()) {
+            mItems.add(new HeaderConnect("Có sẵn"));
+            mItems.addAll(notConnecteds);
+
+        }
+
+        notifyDataSetChanged();
+
+    }
+
+    public List<BaseItemModel> getListConnect() {
+        List<BaseItemModel> itemModels = new ArrayList<>();
+        for (int i = 0; i < mItems.size(); i++) {
+            BaseItemModel item = mItems.get(i);
+            if (item.getType() == TYPE_ITEM) {
+                if (item.isConnect())
+                    itemModels.add(item);
+
+            }
+        }
+        return itemModels;
+    }
+
+    public List<BaseItemModel> getListNotConnected() {
+        List<BaseItemModel> itemModels = new ArrayList<>();
+        for (int i = 0; i < mItems.size(); i++) {
+            BaseItemModel item = mItems.get(i);
+            if (item.getType() == TYPE_ITEM) {
+                if (!item.isConnect())
+                    itemModels.add(item);
+
+            }
+        }
+        return itemModels;
+    }
+
+    public boolean checkConnected(String id) {
+        for (int i = 0; i < mItems.size(); i++) {
+            BaseItemModel baseItemModel = mItems.get(i);
+            if (baseItemModel.getTitle().equals(id) && baseItemModel.isConnect()) return true;
+
+        }
+        return false;
+    }
+
+    public void remove(int positon) {
+        if (positon < 0 || positon >= mItems.size()) return;
+        mItems.remove(positon);
+        this.clone.clear();
+        this.clone.addAll(mItems);
     }
 
     @Override

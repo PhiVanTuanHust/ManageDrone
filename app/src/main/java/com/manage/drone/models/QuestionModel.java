@@ -9,13 +9,14 @@ import java.util.List;
 
 public class QuestionModel extends BaseItemModel {
     public QuestionModel(String title, String answer) {
-        super(title);
+        super(title, false);
         this.answer = answer;
     }
+
     private List<String> lstAnswer;
 
     public QuestionModel(String title, List<String> lstAnswer) {
-        super(title);
+        super(title,false);
         this.lstAnswer = lstAnswer;
     }
 

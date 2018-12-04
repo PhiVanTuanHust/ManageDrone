@@ -9,8 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/edtSearch"
+            android:dropDownAnchor="@+id/edtSearch"
+            android:dropDownHeight="150dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

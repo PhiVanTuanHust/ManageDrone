@@ -6,7 +6,7 @@ package com.manage.drone.models;
 
 public class HeaderConnect extends BaseItemModel {
     public HeaderConnect(String title) {
-        super(title);
+        super(title,false);
 
     }
 
