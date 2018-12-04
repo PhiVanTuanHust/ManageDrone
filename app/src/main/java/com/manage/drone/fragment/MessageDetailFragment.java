@@ -34,10 +34,10 @@ public class MessageDetailFragment extends BaseFragment implements
     private GoogleMap mMap;
     private LatLng latLng;
     private double latMean, lonMean = 0;
-    private Marker oldMarker,marker;
+    private Marker oldMarker, marker;
     private int position = 0;
     private List<LatLng> lstPositionMoving = new ArrayList<>();
-    private static final int WHAT_MARKER=0;
+    private static final int WHAT_MARKER = 0;
 
 
     private Handler mHandler = new Handler() {
@@ -99,38 +99,22 @@ public class MessageDetailFragment extends BaseFragment implements
         googleMap.getUiSettings().setScrollGesturesEnabled(true);
         googleMap.getUiSettings().setTiltGesturesEnabled(false);
         googleMap.getUiSettings().setCompassEnabled(true);
-        if (Const.lstPolygonOptions.size() > 0) {
-
-            for (int i=0;i<Const.lstPolygonOptions.size();i++){
-                PolygonOptions polygonOptions = Const.lstPolygonOptions.get(i);
-                polygonOptions.strokeWidth(10);
-                polygonOptions.strokeColor(getResources().getColor(R.color.colorRed));
-                LatLng marker = getPositionObserve(polygonOptions);
-                addMarkerObserve(marker);
-
-                latMean = latMean + marker.latitude;
-                lonMean = lonMean + marker.longitude;
-                mMap.addPolygon(polygonOptions);
-
-            }
 
 
-            latLng = new LatLng(latMean / Const.lstPolygonOptions.size(), lonMean / Const.lstPolygonOptions.size());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(latLng)      // Sets the center of the map to location user
-                    .zoom(17)                   // Sets the zoom
-                    .bearing(90)                // Sets the orientation of the camera to east
-                    .tilt(40)                   // Sets the tilt of the camera to 30 degrees
-                    .build();                   // Creates a CameraPosition from the builder
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-            mMap.setOnMarkerClickListener(this);
-            animateMarker(0);
+        latLng = new LatLng(latMean / Const.lstPolygonOptions.size(), lonMean / Const.lstPolygonOptions.size());
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)      // Sets the center of the map to location user
+                .zoom(17)                   // Sets the zoom
+                .bearing(90)                // Sets the orientation of the camera to east
+                .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mMap.setOnMarkerClickListener(this);
+        oldMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(55.40441324369938, 89.46476418524982)));
+        oldMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone));
 
-        }else {
-            ViewUtil.showAlertDialog((MainActivity)getActivity());
-        }
 
     }
 
@@ -138,7 +122,7 @@ public class MessageDetailFragment extends BaseFragment implements
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        marker=mMap.addMarker(markerOptions);
+        marker = mMap.addMarker(markerOptions);
 
     }
 
@@ -166,7 +150,7 @@ public class MessageDetailFragment extends BaseFragment implements
     public void animateMarker(int position) {
 
         if (position < lstPositionMoving.size() - 1) {
-            position = position+1;
+            position = position + 1;
         } else {
             position = 0;
         }

@@ -54,6 +54,6 @@ public class MessageFragment extends BaseFragment implements BaseRecycleViewAdap
 
     @Override
     public void onItemClick(int position) {
-        ((MainActivity)getActivity()).switchFragment(ObserveFragment.newInstance());
+        ((MainActivity)getActivity()).switchFragment(ControlFragment.newInstance());
     }
 }
