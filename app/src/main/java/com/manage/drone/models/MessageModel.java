@@ -8,8 +8,8 @@ import java.util.List;
  */
 
 public class MessageModel {
-    public static final int SEEN=1;
-    public static final int NOT_SEEN=2;
+    public static final int SEEN = 1;
+    public static final int NOT_SEEN = 2;
     private String from;
     private String description;
     private String date;
@@ -18,11 +18,11 @@ public class MessageModel {
     public MessageModel() {
     }
 
-    public MessageModel(String from, String description, String date,int state) {
+    public MessageModel(String from, String description, String date, int state) {
         this.from = from;
         this.description = description;
         this.date = date;
-        this.state=state;
+        this.state = state;
     }
 
     public String getFrom() {
@@ -40,14 +40,16 @@ public class MessageModel {
     public int getState() {
         return state;
     }
-    public List<MessageModel> getMessage(){
-        List<MessageModel> lstMessage=new ArrayList<>();
-        lstMessage.add(new MessageModel("Admin","Thông báo drone của bạn hết pin","23:39:14 31/10/2018",NOT_SEEN));
-        lstMessage.add(new MessageModel("Admin","Khẩn cấp drone của bạn đi lạc","23:32:14 31/10/2018",SEEN));
-        lstMessage.add(new MessageModel("Admin","Thông báo ảnh được gửi về hệ thống","23:29:14 31/10/2018",SEEN));
-        lstMessage.add(new MessageModel("Admin","Thông báo drone của bạn hết pin","23:39:14 31/10/2018",SEEN));
-        lstMessage.add(new MessageModel("Admin","Thông báo drone của bạn hết pin","23:39:14 31/10/2018",SEEN));
-        lstMessage.add(new MessageModel("Admin","Thông báo drone của bạn hết pin","23:39:14 31/10/2018",SEEN));
+
+    public List<MessageModel> getMessage() {
+        List<MessageModel> lstMessage = new ArrayList<>();
+        lstMessage.add(new MessageModel("Admin", "Khẩn cấp tọa độ (15,224) có nghi ngờ chặt phá rừng", "13:39:14 31/10/2018", NOT_SEEN));
+        lstMessage.add(new MessageModel("Admin", "Khẩn cấp tọa độ (153,124) có nghi ngờ chặt phá rừng", "13:39:14 31/10/2018", NOT_SEEN));
+        lstMessage.add(new MessageModel("Admin", "Khẩn cấp tọa độ (125,224) có nghi ngờ chặt phá rừng", "13:32:14 31/10/2018", SEEN));
+        lstMessage.add(new MessageModel("Admin", "Khẩn cấp tọa độ (15,244) có nghi ngờ chặt phá rừng", "13:29:14 31/10/2018", SEEN));
+        lstMessage.add(new MessageModel("Admin", "Khẩn cấp tọa độ (125,124) có nghi ngờ chặt phá rừng", "13:39:14 31/10/2018", SEEN));
+        lstMessage.add(new MessageModel("Admin", "Khẩn cấp tọa độ (153,294) có nghi ngờ chặt phá rừng", "13:39:14 31/10/2018", SEEN));
+        lstMessage.add(new MessageModel("Admin", "Khẩn cấp tọa độ (145,224) có nghi ngờ chặt phá rừng", "13:39:14 31/10/2018", SEEN));
         return lstMessage;
     }
 }
