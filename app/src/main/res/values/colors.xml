@@ -21,4 +21,6 @@
     <color name="colorTextDetail">#dedede</color>
     <color name="colorBackGroundItem">#101F26</color>
     <color name="black_overlay">#66000000</color>
+    <color name="dard_board_bg">#eae5e5</color>
+    <color name="bg_button_red">#ff4b4b</color>
 </resources>

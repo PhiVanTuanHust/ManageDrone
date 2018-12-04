@@ -18,6 +18,7 @@ import android.widget.ExpandableListView;
 import com.manage.drone.adapter.ExpandableListAdapter;
 import com.manage.drone.fragment.BaseFragment;
 import com.manage.drone.fragment.ConnectFragment;
+import com.manage.drone.fragment.HomeFragment;
 import com.manage.drone.fragment.MessageFragment;
 import com.manage.drone.fragment.ObserveFragment;
 import com.manage.drone.fragment.OperationFragment;
@@ -57,15 +58,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        if (prefs.getBooleanValue(SharePref.NAME_FIRST_OPEN)) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, StartFragment.newInstance(StartFragment.FIRST), StartFragment.class.getSimpleName());
-            transaction.commit();
-        } else {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, StartFragment.newInstance(StartFragment.END), StartFragment.class.getSimpleName());
-            transaction.commit();
-        }
+//        if (prefs.getBooleanValue(SharePref.NAME_FIRST_OPEN)) {
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.container, StartFragment.newInstance(StartFragment.FIRST), StartFragment.class.getSimpleName());
+//            transaction.commit();
+//        } else {
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.container, StartFragment.newInstance(StartFragment.END), StartFragment.class.getSimpleName());
+//            transaction.commit();
+//        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, HomeFragment.newInstance(), HomeFragment.class.getSimpleName());
+        transaction.commit();
 
 
     }
@@ -90,15 +94,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_profile:
-                Intent intent=new Intent(MainActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 break;
             case R.id.action_logout:
-                Intent intent2=new Intent(MainActivity.this, LoginActivity.class);
-                SharePref pref=new SharePref(this);
-                pref.putBoolean(SharePref.NOT_LOGIN,true);
+                Intent intent2 = new Intent(MainActivity.this, LoginActivity.class);
+                SharePref pref = new SharePref(this);
+                pref.putBoolean(SharePref.NOT_LOGIN, true);
                 startActivity(intent2);
                 break;
         }
@@ -123,21 +127,25 @@ public class MainActivity extends AppCompatActivity
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 switch (groupPosition) {
                     case 0:
+                        switchFragment(HomeFragment.newInstance());
+                        onBackPressed();
+                        break;
+                    case 1:
                         ControlActivity.startControl(MainActivity.this);
                         break;
-                    case 2:
+                    case 3:
                         switchFragment(ZoningFragment.newInstance());
                         onBackPressed();
                         break;
-                    case 3:
+                    case 4:
                         switchFragment(ObserveFragment.newInstance());
                         onBackPressed();
                         break;
-                    case 4:
+                    case 5:
                         switchFragment(MessageFragment.newInstance());
                         onBackPressed();
                         break;
-                    case 5:
+                    case 6:
                         onBackPressed();
                         break;
                     default:
