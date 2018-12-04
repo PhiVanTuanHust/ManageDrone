@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 if (groupPosition == 2) {
-                    if (childPosition == 1) {
+                    if (childPosition == 0) {
                         switchFragment(ConnectFragment.newInstance());
                     } else {
                         switchFragment(OperationFragment.newInstance());
