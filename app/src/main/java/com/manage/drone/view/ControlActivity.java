@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.anastr.speedviewlib.PointerSpeedometer;
+import com.manage.drone.MainActivity;
 import com.manage.drone.R;
 import com.manage.drone.control.GyroscopeObserver;
 import com.manage.drone.control.PanoramaImageView;
@@ -37,24 +38,41 @@ import butterknife.OnClick;
  * status bar and navigation/system bar) with user interaction.
  */
 public class ControlActivity extends BaseActivity {
-    @BindView(R.id.frame_back) FrameLayout frameBack;
-    @BindView(R.id.control_view) FlyImageView imgControl;
-    @BindView(R.id.ivCamera) RelativeLayout imgCamera;
-    @BindView(R.id.ivVideo) RelativeLayout viewVideo;
-    @BindView(R.id.layout_record) LinearLayout viewRecord;
-    @BindView(R.id.imgVideo) ImageView imgVideo;
-    @BindView(R.id.main) RelativeLayout layoutMain;
-    @BindView(R.id.frameView) FrameLayout frameLayout;
-    @BindView(R.id.viewSpeed) PointerSpeedometer speedView;
-    @BindView(R.id.tvHeight) TextView tvHeight;
-    @BindView(R.id.tvName) TextView tvName;
-    @BindView(R.id.tvSpeed) TextView tvSpeed;
-    @BindView(R.id.layout_info) LinearLayout layout_info;
-    @BindView(R.id.imgUpSpeed) ImageView imgSpeedUp;
-    @BindView(R.id.imgDownSpeed) ImageView imgSpeedDown;
-    @BindView(R.id.tvTime) TextView tvTime;
-    @BindView(R.id.imgAI) ImageView imgAI;
-    private boolean isAI=false;
+    @BindView(R.id.frame_back)
+    FrameLayout frameBack;
+    @BindView(R.id.control_view)
+    FlyImageView imgControl;
+    @BindView(R.id.ivCamera)
+    RelativeLayout imgCamera;
+    @BindView(R.id.ivVideo)
+    RelativeLayout viewVideo;
+    @BindView(R.id.layout_record)
+    LinearLayout viewRecord;
+    @BindView(R.id.imgVideo)
+    ImageView imgVideo;
+    @BindView(R.id.main)
+    RelativeLayout layoutMain;
+    @BindView(R.id.frameView)
+    FrameLayout frameLayout;
+    @BindView(R.id.viewSpeed)
+    PointerSpeedometer speedView;
+    @BindView(R.id.tvHeight)
+    TextView tvHeight;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvSpeed)
+    TextView tvSpeed;
+    @BindView(R.id.layout_info)
+    LinearLayout layout_info;
+    @BindView(R.id.imgUpSpeed)
+    ImageView imgSpeedUp;
+    @BindView(R.id.imgDownSpeed)
+    ImageView imgSpeedDown;
+    @BindView(R.id.tvTime)
+    TextView tvTime;
+    @BindView(R.id.imgAI)
+    ImageView imgAI;
+    private boolean isAI = false;
     private Thread thread;
     private int time = 0;
     private float unitHeight = 0.5f;
@@ -65,7 +83,8 @@ public class ControlActivity extends BaseActivity {
     private boolean isHide = false;
     @BindView(R.id.imgBackGround)
     PanoramaImageView imgBackGround;
-    @BindView(R.id.layout_right) LinearLayout layoutRight;
+    @BindView(R.id.layout_right)
+    LinearLayout layoutRight;
 
     @Override
     protected int getLayoutRes() {
@@ -263,16 +282,18 @@ public class ControlActivity extends BaseActivity {
         layout_info.startAnimation(animation);
 
     }
+
     @OnClick(R.id.imgAI)
-    public void onAI(){
-        isAI=!isAI;
-        if (isAI){
+    public void onAI() {
+        isAI = !isAI;
+        if (isAI) {
             AIControl();
-        }else {
+        } else {
             HandControl();
         }
 
     }
+
     private void animation() {
         if (isHide) {
             isHide = false;
@@ -281,10 +302,10 @@ public class ControlActivity extends BaseActivity {
         }
     }
 
-    private void AIControl(){
+    private void AIControl() {
         imgControl.setVisibility(View.GONE);
         imgAI.setImageResource(R.drawable.robot);
-        Animation animation =  new TranslateAnimation(0, 0.0f, 0, 0.0f, 0, (float) (-ViewUtil.dip2px(this, 120.0f)), 0, 0.0f);
+        Animation animation = new TranslateAnimation(0, 0.0f, 0, 0.0f, 0, (float) (-ViewUtil.dip2px(this, 120.0f)), 0, 0.0f);
         animation.setDuration(500);
         animation.setFillAfter(true);
         speedView.setSpeedAt(50);
@@ -294,7 +315,7 @@ public class ControlActivity extends BaseActivity {
         layoutRight.setVisibility(View.GONE);
     }
 
-    private void HandControl(){
+    private void HandControl() {
         imgControl.setVisibility(View.VISIBLE);
         imgAI.setImageResource(R.drawable.track);
 //        layout_info.setVisibility(View.VISIBLE);

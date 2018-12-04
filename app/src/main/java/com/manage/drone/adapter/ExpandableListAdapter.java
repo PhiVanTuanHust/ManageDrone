@@ -119,7 +119,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             imgDown.setVisibility(View.GONE);
         }
-        if (groupPosition == 4) {
+        if (groupPosition == 5) {
             txtMessage.setVisibility(View.VISIBLE);
         } else {
             txtMessage.setVisibility(View.GONE);
