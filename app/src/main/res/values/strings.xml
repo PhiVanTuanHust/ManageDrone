@@ -36,5 +36,8 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="des_dashboard1">- Tuần tra kiểm soát khu vực phía Đông Gửi dữ liệu về trung tâm trước 17h00</string>
+    <string name="des_dashboard2">- Kiểm tra lại các khu vực cảnh báo chặt phá rừng ngày hôm qua</string>
+    <string name="des_dashboard3">- Gửi dữ liệu về trung tâm trước 17h00</string>
 
 </resources>

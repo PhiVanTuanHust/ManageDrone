@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.manage.drone.R;
 import com.manage.drone.models.ChildModel;
+import com.manage.drone.models.DashBoard;
 import com.manage.drone.models.GroupModel;
 import com.manage.drone.models.GuideModel;
 
@@ -120,8 +121,7 @@ public class Const {
         return hashMap;
 
 
-
-}
+    }
 
 
     public static List<PolygonOptions> lstPolygonOptions = new ArrayList<>();
@@ -133,12 +133,12 @@ public class Const {
         List<ChildModel> childModels = new ArrayList<>();
         childModels.add(new ChildModel(context.getResources().getString(R.string.group_1_1)));
         childModels.add(new ChildModel(context.getResources().getString(R.string.group_1_2)));
-        hashMap.put(lstGroups.get(1), childModels);
+        hashMap.put(lstGroups.get(2), childModels);
 
         childModels = new ArrayList<>();
         childModels.add(new ChildModel(context.getResources().getString(R.string.group_6_1)));
         childModels.add(new ChildModel(context.getResources().getString(R.string.group_6_2)));
-        hashMap.put(lstGroups.get(6), childModels);
+        hashMap.put(lstGroups.get(7), childModels);
 
         return hashMap;
     }
@@ -146,6 +146,7 @@ public class Const {
     public static List<GroupModel> getMenuGroup(Context context) {
         if (groupModels == null) {
             groupModels = new ArrayList<>();
+            groupModels.add(new GroupModel("Trang chủ", R.drawable.home));
             groupModels.add(new GroupModel("Điều khiển drone", R.drawable.ic_control));
             groupModels.add(new GroupModel(context.getResources().getString(R.string.group_1), R.drawable.icon));
             groupModels.add(new GroupModel(context.getResources().getString(R.string.group_2), R.drawable.ic_zoning));
@@ -156,6 +157,17 @@ public class Const {
         }
 
         return groupModels;
+    }
+
+    public static List<DashBoard> getDashBoard() {
+        List<DashBoard> results = new ArrayList<>();
+        results.add(new DashBoard(R.drawable.plane, "Quãng đường", "25Km"));
+        results.add(new DashBoard(R.drawable.warning, "Cảnh báo", "1"));
+        results.add(new DashBoard(R.drawable.drone2, "Kết nối ", "2 Drones"));
+        results.add(new DashBoard(R.drawable.work2, "Cộng việc", "5 khu vực cần quan sát"));
+        results.add(new DashBoard(R.drawable.area, "Khu vực", "Đã kiểm tra 5 khu vực"));
+        results.add(new DashBoard(R.drawable.error, "Drones Hỏng", "3"));
+        return results;
     }
 
     public static List<GuideModel> getGuide(Context context) {
@@ -170,13 +182,13 @@ public class Const {
         return lst;
     }
 
-    public static List<GroupModel> getListProfile(){
-        List<GroupModel> lst=new ArrayList<>();
-        lst.add(new GroupModel("Nguyễn Văn A",R.drawable.ic_name));
-        lst.add(new GroupModel("01/01/1997",R.drawable.ic_cake));
-        lst.add(new GroupModel("Bách Khoa - Hà Nội",R.drawable.ic_location));
-        lst.add(new GroupModel("0123456789",R.drawable.ic_phone));
-        lst.add(new GroupModel("example@gmail.com",R.drawable.mail));
+    public static List<GroupModel> getListProfile() {
+        List<GroupModel> lst = new ArrayList<>();
+        lst.add(new GroupModel("Nguyễn Văn A", R.drawable.ic_name));
+        lst.add(new GroupModel("01/01/1997", R.drawable.ic_cake));
+        lst.add(new GroupModel("Bách Khoa - Hà Nội", R.drawable.ic_location));
+        lst.add(new GroupModel("0123456789", R.drawable.ic_phone));
+        lst.add(new GroupModel("example@gmail.com", R.drawable.mail));
         return lst;
     }
 
