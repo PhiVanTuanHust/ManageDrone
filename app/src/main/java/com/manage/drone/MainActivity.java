@@ -161,13 +161,13 @@ public class MainActivity extends AppCompatActivity
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                if (groupPosition == 1) {
-                    if (childPosition == 0) {
+                if (groupPosition == 2) {
+                    if (childPosition == 1) {
                         switchFragment(ConnectFragment.newInstance());
                     } else {
                         switchFragment(OperationFragment.newInstance());
                     }
-                } else if (groupPosition == 6) {
+                } else if (groupPosition == 7) {
                     if (childPosition == 0) {
                         switchFragment(GuideActivity.newInstance());
                     } else {
