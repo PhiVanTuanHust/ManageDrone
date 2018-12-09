@@ -11,6 +11,7 @@ import com.manage.drone.R;
 import com.manage.drone.adapter.AdapterMessage;
 import com.manage.drone.adapter.BaseRecycleViewAdapter;
 import com.manage.drone.models.MessageModel;
+import com.manage.drone.view.WarningActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +55,7 @@ public class MessageFragment extends BaseFragment implements BaseRecycleViewAdap
 
     @Override
     public void onItemClick(int position) {
-        ((MainActivity)getActivity()).switchFragment(ControlFragment.newInstance());
+        WarningActivity.startWarning(getActivity());
+//        ((MainActivity)getActivity()).switchFragment(ControlFragment.newInstance());
     }
 }
