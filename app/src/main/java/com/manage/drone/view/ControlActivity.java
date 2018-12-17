@@ -1,11 +1,15 @@
 package com.manage.drone.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -20,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.anastr.speedviewlib.PointerSpeedometer;
-import com.manage.drone.MainActivity;
 import com.manage.drone.R;
 import com.manage.drone.control.GyroscopeObserver;
 import com.manage.drone.control.PanoramaImageView;
@@ -81,6 +84,7 @@ public class ControlActivity extends BaseActivity {
     private boolean isRecord = false;
     private GyroscopeObserver gyroscopeObserver;
     private boolean isHide = false;
+    private static final int PERMISSION_STORAGE=1;
     @BindView(R.id.imgBackGround)
     PanoramaImageView imgBackGround;
     @BindView(R.id.layout_right)
@@ -96,7 +100,6 @@ public class ControlActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ButterKnife.bind(this);
-
 
     }
 
@@ -124,6 +127,18 @@ public class ControlActivity extends BaseActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode==PERMISSION_STORAGE){
+            if (ActivityCompat.checkSelfPermission(ControlActivity.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(ControlActivity.this,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISSION_STORAGE);
+            }
+        }else {
+
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public static void startControl(Context context) {
@@ -159,7 +174,6 @@ public class ControlActivity extends BaseActivity {
                 } catch (InterruptedException e) {
 
                 }
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -285,12 +299,13 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.imgAI)
     public void onAI() {
-        isAI = !isAI;
-        if (isAI) {
-            AIControl();
-        } else {
-            HandControl();
-        }
+        GalleryActivity.startGalleryActivity(ControlActivity.this);
+//        isAI = !isAI;
+//        if (isAI) {
+//            AIControl();
+//        } else {
+//            HandControl();
+//        }
 
     }
 
@@ -318,8 +333,6 @@ public class ControlActivity extends BaseActivity {
     private void HandControl() {
         imgControl.setVisibility(View.VISIBLE);
         imgAI.setImageResource(R.drawable.track);
-//        layout_info.setVisibility(View.VISIBLE);
-
         imgSpeedUp.setVisibility(View.VISIBLE);
         imgSpeedDown.setVisibility(View.VISIBLE);
         layoutRight.setVisibility(View.VISIBLE);

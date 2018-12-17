@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+<ImageView
+    android:id="@+id/imgView"
+    android:scaleType="centerCrop"
+    android:layout_width="match_parent"
+    android:layout_height="200dp" />
+    <TextView
+        android:background="@color/colorTextHint"
+        android:id="@+id/tvTime"
+        android:padding="4dp"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="16sp"
+        android:text="15:10 17/12/2018"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>

@@ -57,6 +57,7 @@ public class StepFragment extends BaseFragment {
         steps.add(new Step(getString(R.string.step_1), false));
         steps.add(new Step(getString(R.string.step_2), false));
         steps.add(new Step(getString(R.string.step_3), false));
+        steps.add(new Step(getString(R.string.step_4), false));
         stepView.setSteps(steps);
         stepView.setOnStepClickListener(new StepView.OnStepClickListener() {
             @Override
@@ -67,24 +68,7 @@ public class StepFragment extends BaseFragment {
         adapter = new AdapterStep(getActivity().getSupportFragmentManager(), getActivity());
         viewPager.setAdapter(adapter);
 
-        int position = viewPager.getCurrentItem();
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                stepView.go(position, true);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     @Subscribe

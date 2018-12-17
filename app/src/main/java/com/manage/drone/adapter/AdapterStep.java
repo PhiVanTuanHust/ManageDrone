@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 import com.manage.drone.fragment.ConnectFragment;
+import com.manage.drone.fragment.JourneyFragment;
 import com.manage.drone.fragment.OperationFragment;
 import com.manage.drone.fragment.StartFragment;
 
@@ -38,6 +39,8 @@ public class AdapterStep extends FragmentStatePagerAdapter {
                 return operationFragment;
             case 2:
                 return startFragment;
+            case 3:
+                return JourneyFragment.newInstance();
             default:
                 return null;
         }
@@ -46,7 +49,7 @@ public class AdapterStep extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override

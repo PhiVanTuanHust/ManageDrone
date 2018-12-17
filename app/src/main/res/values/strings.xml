@@ -31,7 +31,8 @@
 
     <string name="step_1">Kết nối drone</string>
     <string name="step_2">Cấu hình drone</string>
-    <string name="step_3">Bắt đầu</string>
+    <string name="step_3">Thiết lập hành trình bay</string>
+    <string name="step_4">Bắt đầu</string>
 
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="dummy_button">Dummy Button</string>

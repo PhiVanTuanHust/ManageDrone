@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorTextWhite">#fff</color>
     <color name="colorRed">#e20303</color>
-    <color name="colorTextBlack">#000000</color>
+    <color name="colorTextBlack">#212121</color>
     <color name="colorSearchView">#eeeeee</color>
     <color name="divider">#d4d2d2</color>
     <color name="colorSwitch">#46bdbf</color>

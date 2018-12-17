@@ -53,7 +53,12 @@
             android:name=".view.SignUpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".view.WarningActivity"></activity>
+        <activity android:name=".view.WarningActivity" />
+        <activity
+            android:name=".view.GalleryActivity"
+            android:theme="@style/Theme.DesignDemo" />
+        <activity android:name=".view.ViewImageActivity" />
+        <activity android:name=".view.ViewVideoActivity"></activity>
     </application>
 
 </manifest>

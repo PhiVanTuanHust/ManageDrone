@@ -7,6 +7,7 @@ package com.manage.drone.models;
 public abstract class BaseItemModel {
     public static final int TYPE_ITEM = 1;
     public static final int TYPE_HEADER = 0;
+
     private String title;
     private boolean isConnect;
 

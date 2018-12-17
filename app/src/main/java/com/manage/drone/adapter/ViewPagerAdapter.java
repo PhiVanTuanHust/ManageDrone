@@ -1,10 +1,12 @@
 package com.manage.drone.adapter;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.manage.drone.fragment.BaseFragment;
+import com.manage.drone.fragment.GalleryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,23 +16,33 @@ import java.util.List;
  */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    private List<BaseFragment> lstBaseFragments;
+
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
-        lstBaseFragments=new ArrayList<>();
-    }
 
-    public void setLstBaseFragments(List<BaseFragment> lstBaseFragments) {
-        this.lstBaseFragments = lstBaseFragments;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return lstBaseFragments.get(position);
+       return GalleryFragment.newInstance(position+3);
     }
 
     @Override
     public int getCount() {
-        return lstBaseFragments.size();
+        return 2;
+    }
+
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position){
+            case 0:
+                return "Image";
+            case 1:
+                return "Video";
+                default:
+                    return null;
+        }
     }
 }
