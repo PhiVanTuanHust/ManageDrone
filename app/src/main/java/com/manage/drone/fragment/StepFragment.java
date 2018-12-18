@@ -85,7 +85,7 @@ public class StepFragment extends BaseFragment {
         } else if (appAction == AppAction.CHECK_STEP) {
             List<Step> steps = stepView.getSteps();
             if (steps != null) {
-                if (steps.get(0).isDone() && steps.get(1).isDone()) {
+                if (steps.get(0).isDone() && steps.get(1).isDone()&&steps.get(2).isDone()) {
                     bus.post(AppAction.DO_START);
                 } else {
                     Toast.makeText(getContext(), "Chưa hoàn thành tất cả các bước", Toast.LENGTH_SHORT).show();

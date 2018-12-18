@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.manage.drone.R;
 import com.manage.drone.models.ChildModel;
 import com.manage.drone.models.DashBoard;
@@ -125,6 +126,7 @@ public class Const {
 
 
     public static List<PolygonOptions> lstPolygonOptions = new ArrayList<>();
+    public static PolylineOptions options = new PolylineOptions();
 
     public static HashMap<GroupModel, List<ChildModel>> getMenu(Context context) {
         HashMap<GroupModel, List<ChildModel>> hashMap = new HashMap<>();
