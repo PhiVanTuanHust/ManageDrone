@@ -28,6 +28,7 @@ public class GalleryActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setTitle("File của bạn");
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

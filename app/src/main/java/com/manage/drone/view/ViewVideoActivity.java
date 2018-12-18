@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.manage.drone.R;
@@ -33,6 +34,8 @@ public class ViewVideoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
        resVideo=getIntent().getIntExtra("resVideo",R.raw.video);
         ButterKnife.bind(this);
     }
@@ -42,6 +45,7 @@ public class ViewVideoActivity extends BaseActivity {
         mVideoView.setMediaController(mMediaController);
         String path = "android.resource://" + getPackageName() + "/" + resVideo;
         mVideoView.setVideoURI(Uri.parse(path));
+        mVideoView.start();
         mVideoView.setVideoViewCallback(new UniversalVideoView.VideoViewCallback() {
             @Override
             public void onScaleChange(boolean isFullscreen) {

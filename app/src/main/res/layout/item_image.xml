@@ -10,13 +10,14 @@
     android:layout_width="match_parent"
     android:layout_height="200dp" />
     <TextView
-        android:background="@color/colorTextHint"
+        android:background="@drawable/top_btn_bg"
         android:id="@+id/tvTime"
         android:padding="4dp"
+        android:gravity="center_vertical"
         android:textColor="@color/colorTextWhite"
         android:textSize="16sp"
         android:text="15:10 17/12/2018"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="36dp" />
 </FrameLayout>
