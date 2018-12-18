@@ -237,7 +237,10 @@ public class ControlActivity extends BaseActivity {
         tvSpeed.setText(speed + "km/h");
 
     }
-
+    @OnClick(R.id.imgGallery)
+    public void onGallery(){
+        GalleryActivity.startGalleryActivity(ControlActivity.this);
+    }
     @OnClick(R.id.ivVideo)
     public void onVideo() {
         if (isRecord) {
@@ -299,13 +302,12 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.imgAI)
     public void onAI() {
-        GalleryActivity.startGalleryActivity(ControlActivity.this);
-//        isAI = !isAI;
-//        if (isAI) {
-//            AIControl();
-//        } else {
-//            HandControl();
-//        }
+        isAI = !isAI;
+        if (isAI) {
+            AIControl();
+        } else {
+            HandControl();
+        }
 
     }
 
@@ -326,8 +328,9 @@ public class ControlActivity extends BaseActivity {
         speedView.setSpeedAt(50);
         layout_info.startAnimation(animation);
         imgSpeedUp.setVisibility(View.GONE);
-        imgSpeedDown.setVisibility(View.GONE);
-        layoutRight.setVisibility(View.GONE);
+        imgSpeedDown.setVisibility(View.GONE);layoutRight.setVisibility(View.GONE);
+
+        Toast.makeText(this,"Bạn đang ở chế độ tự động điều khiển drone",Toast.LENGTH_SHORT).show();
     }
 
     private void HandControl() {
@@ -336,5 +339,6 @@ public class ControlActivity extends BaseActivity {
         imgSpeedUp.setVisibility(View.VISIBLE);
         imgSpeedDown.setVisibility(View.VISIBLE);
         layoutRight.setVisibility(View.VISIBLE);
+        Toast.makeText(this,"Bạn đang ở chế độ điều khiển drone bằng tay",Toast.LENGTH_SHORT).show();
     }
 }

@@ -17,17 +17,19 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher" />
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:background="@color/transparent">
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+
+            android:layout_gravity="right|bottom">
 
             <TextView
                 android:id="@+id/tvTime"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
-                android:background="@color/colorTextHint"
+                android:gravity="center"
+                android:background="@drawable/top_btn_bg"
                 android:padding="2dp"
                 android:text="00:04"
                 android:textColor="@color/colorTextWhite" />
@@ -38,6 +40,8 @@
 
     <TextView
         android:id="@+id/txtName"
+        android:text="Video 1"
+        android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -45,5 +49,17 @@
         android:layout_toRightOf="@+id/frameView"
         android:gravity="center_vertical"
         android:textColor="@color/colorTextBlack" />
-
+     <TextView
+         android:textSize="14sp"
+         android:layout_marginRight="4dp"
+         android:text="08:17 15/12/2018"
+         android:id="@+id/tvDate"
+         android:textStyle="italic"
+         android:gravity="center_vertical"
+         android:layout_marginTop="28dp"
+         android:textColor="@color/colorTextBlack"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/txtName"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
 </RelativeLayout>
