@@ -126,7 +126,7 @@ public class Const {
 
 
     public static List<PolygonOptions> lstPolygonOptions = new ArrayList<>();
-    public static PolylineOptions options = new PolylineOptions();
+    public static PolylineOptions options ;
 
     public static HashMap<GroupModel, List<ChildModel>> getMenu(Context context) {
         HashMap<GroupModel, List<ChildModel>> hashMap = new HashMap<>();
