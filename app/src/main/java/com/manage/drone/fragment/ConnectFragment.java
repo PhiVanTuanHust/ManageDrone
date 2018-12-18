@@ -1,14 +1,20 @@
 package com.manage.drone.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,7 +44,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
  * Created by Phí Văn Tuấn on 30/10/2018.
  */
 
-public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdapter.ItemClickListener, AppConstant {
+public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdapter.ItemClickListener, AppConstant,TextWatcher,EditText.OnEditorActionListener {
     public static ConnectFragment newInstance() {
         Bundle args = new Bundle();
         ConnectFragment fragment = new ConnectFragment();
@@ -74,6 +80,8 @@ public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdap
         rcvList.addItemDecoration(new VerticalSpacesItemDecoration(10, connectAdapter));
         rcvList.setAdapter(connectAdapter);
         dummy();
+        completeTextView.addTextChangedListener(this);
+        completeTextView.setOnEditorActionListener(this);
         connectAdapter.replace(items);
         suggestAdapter = new SuggestAdapter(getContext(), 0, itemsConnect);
         completeTextView.setAdapter(suggestAdapter);
@@ -237,5 +245,54 @@ public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdap
         itemsConnect.add(new ItemConnect("DR1189044222", false));
         itemsConnect.add(new ItemConnect("DR1289992222", false));
         itemsConnect.add(new ItemConnect("DR3389944922", false));
+    }
+
+    /**
+     * This method is called to notify you that, within <code>s</code>,
+     * the <code>count</code> characters beginning at <code>start</code>
+     * are about to be replaced by new text with length <code>after</code>.
+     * It is an error to attempt to make changes to <code>s</code> from
+     * this callback.
+     *
+     * @param s
+     * @param start
+     * @param count
+     * @param after
+     */
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    /**
+     * This method is called to notify you that, within <code>s</code>,
+     * the <code>count</code> characters beginning at <code>start</code>
+     * have just replaced old text that had length <code>before</code>.
+     * It is an error to attempt to make changes to <code>s</code> from
+     * this callback.
+     *
+     * @param s
+     * @param start
+     * @param before
+     * @param count
+     */
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        connectAdapter.filter(s.toString());
+    }
+    @Override
+    public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            InputMethodManager imm = (InputMethodManager) textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+            return false;
+        }
+        return false;
     }
 }

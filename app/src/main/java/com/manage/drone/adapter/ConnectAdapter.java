@@ -12,10 +12,12 @@ import com.manage.drone.R;
 import com.manage.drone.models.BaseItemModel;
 import com.manage.drone.models.HeaderConnect;
 import com.manage.drone.models.ItemConnect;
+import com.manage.drone.models.QuestionModel;
 import com.manage.drone.utils.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.manage.drone.models.BaseItemModel.TYPE_HEADER;
 import static com.manage.drone.models.BaseItemModel.TYPE_ITEM;
@@ -34,6 +36,7 @@ public class ConnectAdapter extends BaseRecycleViewAdapter {
         super(context, itemClickListener);
         this.context = context;
         connected = new ArrayList<>();
+
     }
 
     @Override
@@ -83,6 +86,7 @@ public class ConnectAdapter extends BaseRecycleViewAdapter {
     public void replace(List<BaseItemModel> items) {
         this.clone.clear();
         this.clone.addAll(items);
+        connected.addAll(items);
         super.replace(items);
 
     }
@@ -195,5 +199,19 @@ public class ConnectAdapter extends BaseRecycleViewAdapter {
             divider = itemView.findViewById(R.id.header_divider);
         }
     }
-
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        mItems.clear();
+        if (charText.length() == 0) {
+            mItems.addAll(connected);
+        } else {
+            for (BaseItemModel wp : connected) {
+                if (wp.getTitle().toLowerCase(Locale.getDefault())
+                        .contains(charText)) {
+                    mItems.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }

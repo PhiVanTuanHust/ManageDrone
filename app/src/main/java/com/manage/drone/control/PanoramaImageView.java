@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.manage.drone.R;
 
 /**
@@ -250,5 +251,7 @@ public class PanoramaImageView extends ImageView {
     public void setOnPanoramaScrollListener(OnPanoramaScrollListener listener) {
         mOnPanoramaScrollListener = listener;
     }
+
+
 }
 

@@ -19,6 +19,7 @@
             android:background="@drawable/bg_search"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="5dp"
+            android:imeOptions="actionSearch"
             android:gravity="center_vertical"
             android:hint="Nhập id Drone"
             android:padding="8dp"

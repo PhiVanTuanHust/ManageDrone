@@ -101,6 +101,7 @@ public class ControlActivity extends BaseActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ButterKnife.bind(this);
 
+
     }
 
     @Override
@@ -198,6 +199,7 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.ivFlyDown)
     public void onFlyDown() {
+
         animation();
         height = height - 0.1f;
         gyroscopeObserver.updateHeight(height);
@@ -341,4 +343,6 @@ public class ControlActivity extends BaseActivity {
         layoutRight.setVisibility(View.VISIBLE);
         Toast.makeText(this,"Bạn đang ở chế độ điều khiển drone bằng tay",Toast.LENGTH_SHORT).show();
     }
+
+
 }
