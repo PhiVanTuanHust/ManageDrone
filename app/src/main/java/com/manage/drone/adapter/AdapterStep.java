@@ -38,9 +38,10 @@ public class AdapterStep extends FragmentStatePagerAdapter {
             case 1:
                 return operationFragment;
             case 2:
-                return startFragment;
-            case 3:
                 return JourneyFragment.newInstance();
+
+            case 3:
+                return startFragment;
             default:
                 return null;
         }
