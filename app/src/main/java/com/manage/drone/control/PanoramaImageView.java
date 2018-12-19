@@ -12,12 +12,13 @@ import android.widget.ImageView;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.manage.drone.R;
+import com.manage.drone.customs.TouchImageView;
 
 /**
  * Created by Phí Văn Tuấn on 30/11/2018.
  */
 
-public class PanoramaImageView extends ImageView {
+public class PanoramaImageView extends TouchImageView {
 
     // Image's scroll orientation
     public final static byte ORIENTATION_NONE = -1;

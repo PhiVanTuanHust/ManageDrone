@@ -8,7 +8,6 @@
     <com.manage.drone.control.PanoramaImageView
         android:id="@+id/imgBackGround"
         android:scaleType="centerCrop"
-        android:enabled="false"
         android:src="@drawable/main_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -54,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/track" />
+            android:src="@drawable/ic_gallery" />
 
     </LinearLayout>
 

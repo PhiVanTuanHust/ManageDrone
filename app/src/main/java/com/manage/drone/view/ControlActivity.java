@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -107,7 +109,11 @@ public class ControlActivity extends BaseActivity {
     @Override
     protected void initData() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frameView, ControlFragment.newInstance()).commit();
+        Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.main_bg);
 
+        imgBackGround.setImageBitmap(bImage);
+        imgBackGround.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imgBackGround.setMaxZoom(4f);
         speedView.setSpeedAt(50);
         speedView.setMaxSpeed(100);
         speedView.setWithPointer(false);
