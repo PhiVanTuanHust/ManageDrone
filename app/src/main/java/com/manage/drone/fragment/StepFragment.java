@@ -67,6 +67,22 @@ public class StepFragment extends BaseFragment {
         });
         adapter = new AdapterStep(getActivity().getSupportFragmentManager(), getActivity());
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                stepView.go(position, true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
     }
@@ -75,17 +91,23 @@ public class StepFragment extends BaseFragment {
     public void onAppAction(AppAction appAction) {
         if (appAction == AppAction.DONE_STEP_1) {
             stepView.setDone(0);
-            if (stepView.getSteps().get(1).isDone()) stepView.setDone(2);
+            if (stepView.getSteps().get(1).isDone() && stepView.getSteps().get(2).isDone())
+                stepView.setDone(3);
         } else if (appAction == AppAction.DONE_STEP_2) {
             stepView.setDone(1);
-            if (stepView.getSteps().get(0).isDone()) stepView.setDone(2);
+            if (stepView.getSteps().get(0).isDone() && stepView.getSteps().get(2).isDone())
+                stepView.setDone(3);
+        } else if (appAction == AppAction.DONE_STEP_3) {
+            stepView.setDone(2);
+            if (stepView.getSteps().get(0).isDone() && stepView.getSteps().get(1).isDone())
+                stepView.setDone(3);
         } else if (appAction == AppAction.REVERSE_STEP_2) {
             stepView.reverse(1);
             stepView.reverse(2);
         } else if (appAction == AppAction.CHECK_STEP) {
             List<Step> steps = stepView.getSteps();
             if (steps != null) {
-                if (steps.get(0).isDone() && steps.get(1).isDone()&&steps.get(2).isDone()) {
+                if (steps.get(0).isDone() && steps.get(1).isDone() && steps.get(2).isDone()) {
                     bus.post(AppAction.DO_START);
                 } else {
                     Toast.makeText(getContext(), "Chưa hoàn thành tất cả các bước", Toast.LENGTH_SHORT).show();
