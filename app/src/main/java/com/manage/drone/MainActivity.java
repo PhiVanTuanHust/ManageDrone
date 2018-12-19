@@ -18,6 +18,7 @@ import android.widget.ExpandableListView;
 import com.manage.drone.adapter.ExpandableListAdapter;
 import com.manage.drone.fragment.BaseFragment;
 import com.manage.drone.fragment.ConnectFragment;
+import com.manage.drone.fragment.GalleryFragment;
 import com.manage.drone.fragment.HomeFragment;
 import com.manage.drone.fragment.MessageFragment;
 import com.manage.drone.fragment.ObserveFragment;
@@ -30,6 +31,8 @@ import com.manage.drone.view.ControlActivity;
 import com.manage.drone.view.GuideActivity;
 import com.manage.drone.view.LoginActivity;
 import com.manage.drone.view.ProfileActivity;
+
+import static com.manage.drone.models.BaseGalleryModel.TYPE_IMAGE;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -138,7 +141,7 @@ public class MainActivity extends AppCompatActivity
                         onBackPressed();
                         break;
                     case 4:
-                        switchFragment(ObserveFragment.newInstance());
+                        switchFragment(GalleryFragment.newInstance(TYPE_IMAGE));
                         onBackPressed();
                         break;
                     case 5:
