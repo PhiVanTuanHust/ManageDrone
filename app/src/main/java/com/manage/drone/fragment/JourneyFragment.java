@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.manage.drone.AppAction;
 import com.manage.drone.R;
 import com.manage.drone.googlemap.DrawingPanel;
 import com.manage.drone.googlemap.MapFragment;
@@ -49,8 +50,8 @@ public class JourneyFragment extends BaseFragment implements
     private DrawingPanel drawingpanel;
     private SupportMapFragment mapFragment;
     private ArrayList<LatLng> latLngs;
-//    private PolygonOptions polygonOptions;
-private PolylineOptions options;
+    //    private PolygonOptions polygonOptions;
+    private PolylineOptions options;
     private LatLng latLng = new LatLng(55.404290078521235, 89.46081262081861);
     @BindView(R.id.frame_view)
     FrameLayout flMapContainer;
@@ -61,8 +62,9 @@ private PolylineOptions options;
     @BindView(R.id.imgDone)
     ImageView imgDone;
     private HashSet<List<LatLng>> set;
-    private int position=0;
-    private static final int WHAT_MARKER=0;
+    private int position = 0;
+    private static final int WHAT_MARKER = 0;
+
     public static JourneyFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -71,6 +73,7 @@ private PolylineOptions options;
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected int getLayoutRes() {
         return R.layout.zoning_fragment;
@@ -78,7 +81,7 @@ private PolylineOptions options;
 
     @Override
     protected void initView(View view) {
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -111,15 +114,15 @@ private PolylineOptions options;
                 latLngs.add(latLng);
 
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    latLngs.remove(latLngs.size()-1);
+                    latLngs.remove(latLngs.size() - 1);
                     options.width(8).color(Color.RED).geodesic(true);
                     for (int z = 0; z < latLngs.size(); z++) {
 
                         LatLng point = latLngs.get(z);
                         options.add(point);
-                        if (z==0){
+                        if (z == 0) {
                             mMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone)));
-                        }else if (z==latLngs.size()-1){
+                        } else if (z == latLngs.size() - 1) {
                             mMap.addMarker(new MarkerOptions().position(point));
 
                         }
@@ -128,7 +131,7 @@ private PolylineOptions options;
                     drawingpanel.setVisibility(View.GONE);
 
                     drawingpanel.clear();
-                    Const.options=options;
+                    Const.options = options;
                     drawingpanel.setVisibility(View.GONE);
                     imgDone.setVisibility(View.VISIBLE);
                     imgDelete.setVisibility(View.VISIBLE);
@@ -184,6 +187,7 @@ private PolylineOptions options;
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
     }
+
     private double distance(double lat1, double lon1, double lat2, double lon2) {
         Location selected_location = new Location("locationA");
         selected_location.setLatitude(lat1);
@@ -228,8 +232,10 @@ private PolylineOptions options;
     }
 
     @OnClick(R.id.imgDone)
-    public void onDone(){
-
+    public void onDone() {
+        bus.post(AppAction.DONE_STEP_3);
+        imgDone.setVisibility(View.GONE);
+        imgDelete.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.imgDelete)
@@ -240,17 +246,18 @@ private PolylineOptions options;
         imgDone.setVisibility(View.GONE);
         imgDelete.setVisibility(View.GONE);
         options = new PolylineOptions();
-        Const.options=options;
-        latLngs=new ArrayList<>();
+        Const.options = options;
+        latLngs = new ArrayList<>();
 
     }
+
     @OnClick(R.id.imgSelected)
     public void onDraw() {
         drawingpanel.setVisibility(View.VISIBLE);
         drawingpanel.clear();
         options = new PolylineOptions();
-        Const.options=options;
-        latLngs=new ArrayList<>();
+        Const.options = options;
+        latLngs = new ArrayList<>();
 
     }
 }

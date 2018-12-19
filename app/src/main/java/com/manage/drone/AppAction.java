@@ -13,7 +13,8 @@ public enum AppAction {
     REVERSE_STEP_2("reverse_step2"),
     CHECK_STEP("check_step"),
     DO_START("do_start"),
-    DONE_STEP_2("finish_step2");
+    DONE_STEP_2("finish_step2"),
+    DONE_STEP_3("finish_step3");
 
     public String value;
 
