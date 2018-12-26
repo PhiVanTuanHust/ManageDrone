@@ -6,13 +6,18 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.view.DragEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -25,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.github.anastr.speedviewlib.PointerSpeedometer;
 import com.manage.drone.R;
 import com.manage.drone.control.GyroscopeObserver;
@@ -32,6 +38,9 @@ import com.manage.drone.control.PanoramaImageView;
 import com.manage.drone.customs.FlyImageView;
 import com.manage.drone.fragment.ControlFragment;
 import com.manage.drone.utils.ViewUtil;
+import com.tenor.android.core.loader.GlideTaskParams;
+import com.tenor.android.core.loader.WeakRefContentLoaderTaskListener;
+import com.tenor.android.core.loader.gif.GifLoader;
 
 
 import butterknife.BindView;
@@ -84,6 +93,7 @@ public class ControlActivity extends BaseActivity {
     private float height = 0.0f;
     private float unitSpeed = 0.5f;
     private boolean isRecord = false;
+    private float scale=1.0f;
     private GyroscopeObserver gyroscopeObserver;
     private boolean isHide = false;
     private static final int PERMISSION_STORAGE=1;
@@ -110,16 +120,43 @@ public class ControlActivity extends BaseActivity {
     protected void initData() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frameView, ControlFragment.newInstance()).commit();
         Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.main_bg);
+        String path = "android.resource://" + getPackageName() + "/" + R.drawable.giphy;
+        GlideTaskParams<PanoramaImageView> params = new GlideTaskParams<>(imgBackGround,path );
+        params.setListener(new WeakRefContentLoaderTaskListener<Context, PanoramaImageView>(ControlActivity.this) {
+            @Override
+            public void success(@NonNull Context context, @NonNull PanoramaImageView target, @Nullable Drawable taskResult) {
 
-        imgBackGround.setImageBitmap(bImage);
-        imgBackGround.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imgBackGround.setMaxZoom(4f);
+                //layout_set.setVisibility(View.VISIBLE);
+//                float ret[]=Utils.getBitmapPositionInsideImageView(imgGif);
+
+
+
+//                Utils.getPreferences(DisplayGifActivity.this).edit().putFloat(Const.SCALE_HEIGHT,ret[4]).apply();
+//                Utils.getPreferences(DisplayGifActivity.this).edit().putFloat(Const.PREFS_HEIGHT,ret[1]).apply();
+
+            }
+
+            @Override
+            public void failure(@NonNull Context context, @NonNull PanoramaImageView target, @Nullable Drawable errorResult) {
+
+                Toast.makeText(ControlActivity.this, "Fail to load image !", Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
+
+        GifLoader.loadGif(ControlActivity.this, params);
+//        imgBackGround.setImageBitmap(bImage);
+//        imgBackGround.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        imgBackGround.setMaxZoom(4f);
         speedView.setSpeedAt(50);
         speedView.setMaxSpeed(100);
         speedView.setWithPointer(false);
         speedView.setUnit("Km/h");
         gyroscopeObserver = new GyroscopeObserver();
         imgControl.setObserver(gyroscopeObserver);
+        imgBackGround.setMinimumScale(0f);
+        imgBackGround.setMaximumScale(2.0f);
         imgBackGround.setGyroscopeObserver(gyroscopeObserver);
         hideView();
 
@@ -138,13 +175,7 @@ public class ControlActivity extends BaseActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode==PERMISSION_STORAGE){
-            if (ActivityCompat.checkSelfPermission(ControlActivity.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(ControlActivity.this,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISSION_STORAGE);
-            }
-        }else {
 
-        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -195,8 +226,13 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.ivFlyUp)
     public void onFlyUp() {
-
+//        imgBackGround.zoomIn();
         animation();
+        scale=scale-0.1f;
+        if (scale<1.0f){
+            scale=1.0f;
+        }
+        imgBackGround.setScale(scale);
         height = height + 0.1f;
         gyroscopeObserver.updateHeight(height);
         float height = getHeight(tvHeight.getText().toString().replace("m", "")) + unitHeight;
@@ -205,7 +241,10 @@ public class ControlActivity extends BaseActivity {
 
     @OnClick(R.id.ivFlyDown)
     public void onFlyDown() {
+        scale=scale+0.1f;
+        imgBackGround.setScale(scale);
 
+//        imgBackGround.zoomOut();
         animation();
         height = height - 0.1f;
         gyroscopeObserver.updateHeight(height);

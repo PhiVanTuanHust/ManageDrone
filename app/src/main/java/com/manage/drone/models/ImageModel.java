@@ -5,8 +5,8 @@ package com.manage.drone.models;
  */
 
 public class ImageModel extends BaseGalleryModel {
-    public ImageModel(int imgThumb, String time) {
-        super(imgThumb, time);
+    public ImageModel(int imgThumb, String time,int state) {
+        super(imgThumb, time,state);
     }
 
     @Override

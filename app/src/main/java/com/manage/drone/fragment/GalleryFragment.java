@@ -76,20 +76,20 @@ public class GalleryFragment extends BaseFragment implements BaseRecycleViewAdap
 
     private List<BaseGalleryModel> getListImage(){
         List<BaseGalleryModel> lst=new ArrayList<>();
-        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018"));
-        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018"));
-        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018"));
-        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018"));
-        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018"));
+        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018",BaseGalleryModel.STATE_DONE));
+        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018",BaseGalleryModel.STATE_UPLOAD));
+        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018",BaseGalleryModel.STATE_UPLOAD));
+        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018",BaseGalleryModel.STATE_UPLOAD));
+        lst.add(new ImageModel(R.drawable.main_bg,"14:15 17/12/2018",BaseGalleryModel.STATE_UPLOAD));
         return lst;
     }
     private List<BaseGalleryModel> getListVideo(){
         List<BaseGalleryModel> lst=new ArrayList<>();
-        lst.add(new VideoModel(R.drawable.main_bg,"00:19",R.raw.video,"Video1"));
-        lst.add(new VideoModel(R.drawable.main_bg,"00:16",R.raw.video,"Video2"));
-        lst.add(new VideoModel(R.drawable.main_bg,"01:25",R.raw.video,"Video3"));
-        lst.add(new VideoModel(R.drawable.main_bg,"02:19",R.raw.video,"Video4"));
-        lst.add(new VideoModel(R.drawable.main_bg,"00:19",R.raw.video,"Video5"));
+        lst.add(new VideoModel(R.drawable.main_bg,"00:19",BaseGalleryModel.STATE_UPLOAD,R.raw.video,"Video1"));
+        lst.add(new VideoModel(R.drawable.main_bg,"00:16",BaseGalleryModel.STATE_UPLOAD,R.raw.video,"Video2"));
+        lst.add(new VideoModel(R.drawable.main_bg,"01:25",BaseGalleryModel.STATE_DONE,R.raw.video,"Video3"));
+        lst.add(new VideoModel(R.drawable.main_bg,"02:19",BaseGalleryModel.STATE_UPLOAD,R.raw.video,"Video4"));
+        lst.add(new VideoModel(R.drawable.main_bg,"00:19",BaseGalleryModel.STATE_UPLOAD,R.raw.video,"Video5"));
         return lst;
     }
 }

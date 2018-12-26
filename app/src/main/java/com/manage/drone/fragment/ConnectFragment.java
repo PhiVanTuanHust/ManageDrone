@@ -227,14 +227,18 @@ public class ConnectFragment extends BaseFragment implements BaseRecycleViewAdap
         items.clear();
 
         items.add(new HeaderConnect("Drone có sẵn"));
-        items.add(new ItemConnect("DR118992922", false));
-        items.add(new ItemConnect("DR118903022", false));
-        items.add(new ItemConnect("DR128994922", false));
-        items.add(new ItemConnect("DR3389249922", false));
-        items.add(new ItemConnect("DR1189494922", false));
-        items.add(new ItemConnect("DR1189044222", false));
-        items.add(new ItemConnect("DR1289992222", false));
-        items.add(new ItemConnect("DR3389944922", false));
+        for (int i=0;i<20;i++){
+            String title="DR888888996"+i;
+            items.add(new ItemConnect(title, false));
+        }
+//        items.add(new ItemConnect("DR118992922", false));
+//        items.add(new ItemConnect("DR118903022", false));
+//        items.add(new ItemConnect("DR128994922", false));
+//        items.add(new ItemConnect("DR3389249922", false));
+//        items.add(new ItemConnect("DR1189494922", false));
+//        items.add(new ItemConnect("DR1189044222", false));
+//        items.add(new ItemConnect("DR1289992222", false));
+//        items.add(new ItemConnect("DR3389944922", false));
 
         itemsConnect.clear();
         itemsConnect.add(new ItemConnect("DR118992922", false));

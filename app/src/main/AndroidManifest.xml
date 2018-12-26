@@ -58,11 +58,13 @@
             android:name=".view.GalleryActivity"
             android:theme="@style/Theme.DesignDemo" />
         <activity android:name=".view.ViewImageActivity" />
-        <activity android:name=".view.ViewVideoActivity"
+        <activity
+            android:name=".view.ViewVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".view.MapActivity"></activity>
     </application>
 
 </manifest>

@@ -13,10 +13,12 @@ import com.manage.drone.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class WarningActivity extends BaseActivity {
    @BindView(R.id.imgWarning)
    PhotoView imgWarning;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_warning;
@@ -48,5 +50,10 @@ public class WarningActivity extends BaseActivity {
     public static void startWarning(Context context){
         Intent intent=new Intent(context,WarningActivity.class);
         context.startActivity(intent);
+    }
+
+    @OnClick(R.id.btnViewMap)
+    public void onViewMap(){
+        MapActivity.startMap(WarningActivity.this);
     }
 }

@@ -41,6 +41,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.manage.drone.models.BaseGalleryModel.TYPE_IMAGE;
+
 /**
  * Created by Phí Văn Tuấn on 30/10/2018.
  */
@@ -262,7 +264,7 @@ public class ZoningFragment extends BaseFragment implements
     public void onDone() {
         MainActivity mainActivity=(MainActivity)getActivity();
         if (mainActivity!=null){
-            mainActivity.switchFragment(ObserveFragment.newInstance());
+            mainActivity.switchFragment(GalleryFragment.newInstance(TYPE_IMAGE));
         }
 
     }

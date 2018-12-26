@@ -133,7 +133,17 @@
                 android:textStyle="bold" />
         </RelativeLayout>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/btnViewMap"
+        android:padding="8dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/colorTextWhite"
+        android:background="@drawable/bg_start"
+        android:text="Xem trên bản đồ"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/imgWarning"
         android:layout_width="match_parent"

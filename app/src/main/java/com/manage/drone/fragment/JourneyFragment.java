@@ -2,7 +2,6 @@ package com.manage.drone.fragment;
 
 import android.graphics.Color;
 import android.graphics.Point;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -15,20 +14,17 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.manage.drone.AppAction;
 import com.manage.drone.R;
 import com.manage.drone.googlemap.DrawingPanel;
 import com.manage.drone.googlemap.MapFragment;
-import com.manage.drone.models.MarkerModel;
 import com.manage.drone.utils.Const;
 
 import java.util.ArrayList;
@@ -45,14 +41,16 @@ import butterknife.OnClick;
 
 public class JourneyFragment extends BaseFragment implements
         GoogleMap.OnMyLocationButtonClickListener,
-        OnMapReadyCallback, GoogleMap.OnMapClickListener {
+        OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener {
     private GoogleMap mMap;
     private DrawingPanel drawingpanel;
     private SupportMapFragment mapFragment;
     private ArrayList<LatLng> latLngs;
+    private Marker firstMarker ;
+            private Marker endMarker;
     //    private PolygonOptions polygonOptions;
     private PolylineOptions options;
-    private LatLng latLng = new LatLng(55.404290078521235, 89.46081262081861);
+    private LatLng latLong = new LatLng(55.404290078521235, 89.46081262081861);
     @BindView(R.id.frame_view)
     FrameLayout flMapContainer;
     @BindView(R.id.imgSelected)
@@ -116,14 +114,15 @@ public class JourneyFragment extends BaseFragment implements
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     latLngs.remove(latLngs.size() - 1);
                     options.width(8).color(Color.RED).geodesic(true);
+                    options.add(latLong);
                     for (int z = 0; z < latLngs.size(); z++) {
 
                         LatLng point = latLngs.get(z);
                         options.add(point);
                         if (z == 0) {
-                            mMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone)));
+//                            firstMarker= mMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone)));
                         } else if (z == latLngs.size() - 1) {
-                            mMap.addMarker(new MarkerOptions().position(point));
+                            endMarker=mMap.addMarker(new MarkerOptions().position(point));
 
                         }
                     }
@@ -175,10 +174,10 @@ public class JourneyFragment extends BaseFragment implements
             }
         });
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
-
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLong, 13));
+        firstMarker=mMap.addMarker(new MarkerOptions().position(latLong).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_drone)));
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(latLng)      // Sets the center of the map to location user
+                .target(latLong)      // Sets the center of the map to location user
                 .zoom(16)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
                 .tilt(40)                   // Sets the tilt of the camera to 30 degrees
@@ -188,17 +187,6 @@ public class JourneyFragment extends BaseFragment implements
 
     }
 
-    private double distance(double lat1, double lon1, double lat2, double lon2) {
-        Location selected_location = new Location("locationA");
-        selected_location.setLatitude(lat1);
-        selected_location.setLongitude(lon1);
-        Location near_locations = new Location("locationA");
-        near_locations.setLatitude(lat2);
-        near_locations.setLongitude(lon2);
-
-        double distance = selected_location.distanceTo(near_locations);
-        return distance;
-    }
 
     private void setFadeOutAfterSomeTime() {
         new Handler().postDelayed(new Runnable() {
@@ -259,5 +247,13 @@ public class JourneyFragment extends BaseFragment implements
         Const.options = options;
         latLngs = new ArrayList<>();
 
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (marker.equals(firstMarker)||marker.equals(endMarker)){
+            marker.showInfoWindow();
+        }
+        return false;
     }
 }

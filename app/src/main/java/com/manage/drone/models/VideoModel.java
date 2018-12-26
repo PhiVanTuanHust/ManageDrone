@@ -11,8 +11,8 @@ public class VideoModel extends BaseGalleryModel {
         return pathVideo;
     }
 
-    public VideoModel(int imgThumb, String time,int pathVideo,String name) {
-        super(imgThumb, time);
+    public VideoModel(int imgThumb, String time,int state,int pathVideo,String name) {
+        super(imgThumb, time,state);
         this.pathVideo=pathVideo;
         this.name=name;
     }

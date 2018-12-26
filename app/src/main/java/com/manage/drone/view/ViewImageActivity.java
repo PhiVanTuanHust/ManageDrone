@@ -2,8 +2,7 @@ package com.manage.drone.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,6 +13,7 @@ import com.manage.drone.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ViewImageActivity extends BaseActivity {
     @BindView(R.id.iv_photo)
@@ -49,7 +49,10 @@ public class ViewImageActivity extends BaseActivity {
         });
     }
 
-
+    @OnClick(R.id.imgBack)
+    public void onBack(){
+        onBackPressed();
+    }
     public static void openImage(Context context,int resDrawable){
         Intent intent=new Intent(context,ViewImageActivity.class);
         intent.putExtra("resDrawable",resDrawable);

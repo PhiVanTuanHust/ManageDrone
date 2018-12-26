@@ -19,7 +19,6 @@
         <RelativeLayout
             android:layout_width="48dp"
             android:layout_height="24dp"
-
             android:layout_gravity="right|bottom">
 
             <TextView
@@ -56,10 +55,18 @@
          android:id="@+id/tvDate"
          android:textStyle="italic"
          android:gravity="center_vertical"
-         android:layout_marginTop="28dp"
+         android:layout_marginTop="4dp"
          android:textColor="@color/colorTextBlack"
-         android:layout_alignParentRight="true"
-         android:layout_below="@+id/txtName"
+         android:layout_toLeftOf="@+id/imgCheck"
+         android:layout_below="@+id/imgCheck"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/imgCheck"
+        android:layout_margin="4dp"
+        android:src="@drawable/check"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
